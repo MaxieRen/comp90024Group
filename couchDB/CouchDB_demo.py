@@ -4,13 +4,13 @@ import json
 # authentication
 admin = 'admin'
 password = 'password'
-url = f'http://{admin}:{password}@127.0.0.1:5984/'
+url = f'http://{admin}:{password}@172.26.135.248:5984/'
 
 # get couchdb instance
 couch = couchdb.Server(url)
 
 # indicate the db name
-db_name = 'testdemo'
+db_name = 'testdemo2'
 
 # if not exist, create one
 if db_name not in couch:
