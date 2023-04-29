@@ -55,11 +55,6 @@ def api_0(param):
 
 
 
-
-
-
-
-
 # @app.route('/api_1', methods=['GET', 'POST', 'DELETE'])
 # def api_1():
 #     if request.method == 'POST':
