@@ -5,13 +5,13 @@ import json
 # authentication
 admin = 'admin'
 password = 'password'
-url = f'http://{admin}:{password}@127.0.0.1:5984/'
+url = f'http://{admin}:{password}@172.26.135.248:5984/'
 
 # get couchdb instance
 couch = couchdb.Server(url)
 
 # indicate the db name
-db_name = 'mastodon'
+db_name = 'mastodon2'
 
 # if not exist, create one
 if db_name not in couch:
@@ -20,10 +20,10 @@ else:
     db = couch[db_name]
 
 # optional, better not hardcode here
-token = ''
+token = 'AvLtf57hHjGtSP5Qq_t-UyAfVABievlLY9Toba3RkZ8'
 m = Mastodon(
     # your server here
-    api_base_url=f'https://mastodon.au',
+    api_base_url=f'https://aus.social/',
     access_token=token
 )
 

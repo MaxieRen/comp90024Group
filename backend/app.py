@@ -7,13 +7,13 @@ import couchdb
 # authentication
 admin = 'admin'
 password = 'password'
-url = f'http://{admin}:{password}@172.26.130.118:5984/'
+url = f'http://{admin}:{password}@172.26.135.248:5984/'
 
 # get couchdb instance
 couch = couchdb.Server(url)
 
 # indicate the db name
-db_name = 'mastodon'
+db_name = 'mastodon2'
 
 # if not exist, create one
 if db_name not in couch:
@@ -40,8 +40,8 @@ def root():
 def api_0(param):
     # Mango Queries
     query = {
-        'selector': {
-            'language': param
+        "selector": {
+      "language": param
         }
     }
     # Execute the query
@@ -105,4 +105,4 @@ class api_2(Resource):
 api.add_resource(api_2, '/api_2', '/api_2/<id>')
 
 if __name__ == '__main__':
-    app.run(debug=True, host='127.0.0.1', port='8080')
+    app.run(debug=True, host='127.0.0.1', port='8081')
