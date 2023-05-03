@@ -27,7 +27,7 @@ export default {
     methods: {
         async getData1() {
             try {
-                const response = await axios.get('http://127.0.0.1:8080/api_1');
+                const response = await axios.get('http://127.0.0.1:8081/api_1');
                 console.log(response.data);
                 this.data = response.data;
             } catch (error) {
@@ -36,7 +36,7 @@ export default {
         },
         async getData2() {
             try {
-                const response = await axios.post('http://127.0.0.1:8080/api_1');
+                const response = await axios.post('http://127.0.0.1:8081/api_1');
                 console.log(response.data);
                 this.data = response.data;
             } catch (error) {

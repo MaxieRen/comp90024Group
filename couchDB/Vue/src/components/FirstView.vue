@@ -1,9 +1,9 @@
 <template>
     <div>
-        <button @click="getData1">获取数据</button>
+        <button @click="getData1">获取数据</button> <!--  click envent will trigger get data 1 method-->
         <h1>This is 1st View</h1>
         <ul>
-            <li v-for="(item, index) in data" :key="index">{{ item }}</li>
+            <li v-for="(item, index) in data" :key="index">{{ item }}</li> <!-- dynamically updated -->
         </ul>
         <button @click="getData2">获取数据</button>
     </div>
@@ -23,9 +23,9 @@ export default {
         };
     },
     methods: {
-        async getData1() {
+        async getData1() { // get data 1 method calls api GET that backends implemented
             try {
-                const response = await axios.get('http://127.0.0.1:8080/api_1');
+                const response = await axios.get('http://127.0.0.1:8081/api_1');
                 console.log(response.data);
                 this.data = response.data;
             } catch (error) {
@@ -34,10 +34,10 @@ export default {
         },
         async getData2() {
             try {
-                const response = await axios.post('http://127.0.0.1:8080/api_1');
+                const response = await axios.post('http://127.0.0.1:8081/api_1');
                 console.log(response.data);
                 this.data = response.data;
-            } catch (error) {
+            } catch (error) { 
                 console.log(error);
             }
         },

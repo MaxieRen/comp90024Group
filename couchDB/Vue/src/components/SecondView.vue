@@ -27,7 +27,7 @@ export default {
     methods: {
         async getData1() {
             try {
-                const response = await axios.get('http://127.0.0.1:8080/api_2');
+                const response = await axios.get('http://127.0.0.1:8081/api_2');
                 console.log(response.data);
                 this.chartData = response.data;
                 this.updateChart();
