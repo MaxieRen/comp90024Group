@@ -12,16 +12,16 @@ url = f'http://{admin}:{password}@172.26.135.248:5984/'
 couch = couchdb.Server(url)
 
 # indicate the db name
-db_name = ['twitterDB','mastodonDB','laborMarketDB']
+db_name = ['twitter_db','mastodon_db','labor_market_db']
 
 # if not exist, create one
-for name in db_name:
-    if db_name not in couch:
-        db = couch.create(db_name)
+# for name in db_name:
+#     if name not in couch:
+#         db = couch.create(name)
 
-db_tt = couch['twitterDB']
-db_md = couch['mastodonDB']
-db_lm = couch['laborMarketDB']
+db_tt = couch['twitter_db']
+db_md = couch['mastodon_db']
+db_lm = couch['labor_market_db']
 
 app = Flask(__name__)
 api = Api(app)
