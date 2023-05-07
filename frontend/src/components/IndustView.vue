@@ -7,6 +7,16 @@
         <button @click="updateChart" >更新图表</button>
         <ul>{{string}}</ul>
         <button @click="getData2">修改数据</button>
+
+        <div>
+            <figure class="highcharts-figure">
+                <div id="container"></div>
+                <p class="highcharts-description">
+                    This pie chart shows how the chart legend can be used to provide
+                    information about the individual slices.
+                </p>
+            </figure>
+        </div>
     </div>
 </template>
 
@@ -55,7 +65,7 @@ export default {
                         x: -20 //center
                 },
                 subtitle: {
-                    text: 'Source: WorldClimate.com',
+                    text: 'Source: ABS',
                         x: -20
                 },
                 xAxis: {
@@ -99,8 +109,61 @@ export default {
         },
     },
     mounted() {
-        // this.chart = echarts.init(this.$refs.chart);
-        // this.updateChart();
+        const chart =Highcharts.chart('container', {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
+            },
+            title: {
+                text: 'Industries composition',
+                align: 'left'
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            accessibility: {
+                point: {
+                    valueSuffix: '%'
+                }
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false
+                    },
+                    showInLegend: true
+                }
+            },
+            series: [{
+                name: 'Brands',
+                colorByPoint: true,
+                data: [{
+                    name: 'Chrome',
+                    y: 74.77,
+                    sliced: true,
+                    selected: true
+                },  {
+                    name: 'Edge',
+                    y: 12.82
+                },  {
+                    name: 'Firefox',
+                    y: 4.63
+                }, {
+                    name: 'Safari',
+                    y: 2.44
+                }, {
+                    name: 'Internet Explorer',
+                    y: 2.02
+                }, {
+                    name: 'Other',
+                    y: 3.28
+                }]
+            }]
+        });
     }
 }
 </script>

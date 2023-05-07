@@ -8,6 +8,5 @@ import "bootstrap"
 
 const app = createApp(App);
 app.use(router);
-app.use(Highcharts);
 app.use(HighchartsVue);
 app.mount('#app');

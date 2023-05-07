@@ -1,6 +1,7 @@
 <template>
-    <div> <h2>Welcome!</h2>
-    <p> We are group 66</p>
+    <div>
+        <h2>Welcome!</h2>
+        <p> We are group 66</p>
     </div>
 </template>
 
