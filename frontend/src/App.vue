@@ -6,32 +6,36 @@
         </div>
     </div>
     <div id="app">
-        <nav class="navbar navbar-expand-lg">
+        <nav class="navbar navbar-expand-lg my-2">
             <div class="container">
-                <a class="navbar-brand" href="/">Home Page</a>
+                <a class="navbar-brand" href="/Home">Home Page</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-                    <ul class="navbar-nav ms-auto">
+                    <ul class="navbar-nav ms-auto ">
                         <li class="nav-item">
-                            <a class="nav-link" href="/view1">Regions</a>
+                            <a class="nav-link" href="/view0">Overview</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/view2">Industries</a>
+                            <a class="nav-link" href="/RegionView">Regions</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/view3">Occupations</a>
+                            <a class="nav-link" href="/IndustView">Industries</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="">Twitter Analysis</a>
+                            <a class="nav-link" href="/OccuView">Occupations</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/TweetView">Twitter Analysis</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </div>
-    <router-view></router-view>
+
+    <router-view> </router-view>
 <!--    <div class="row no-gutters">-->
 <!--        <div class="col col-12">-->
 <!--            <ul class="nav nav-tabs explore-bar-tabs" id="explore-bar-tabs">-->
@@ -63,103 +67,30 @@
 <!--            </ul>-->
 <!--        </div>-->
 <!--    </div>-->
-    <div class="container">
-        <div class="insights-card mb-5">
 
-            <h2 class="text-center mb-3">
-                Employment Insights for Australia
-            </h2>
-            <div class="container-fluid">
-                <div class="row mb-3">
-                    <div class="col-xs-12 col-sm-12 col-md-3 mt-3">
-                        <div class="d-flex flex-column justify-content-center align-items-center">
-                            <img src="./assets/images/working-age-population.svg" alt="" class="snapshot-img" />
-                            <div class="insights-data pt-2">17,028,900</div>
-                            <div class="insights-title" >Working Age Population</div>
-                            <div class="insights-title pb-2">(15-64)</div>
-                        </div>
-                    </div>
-
-                    <div class="col-xs-12 col-sm-12 col-md-2 mt-3">
-                        <div class="d-flex flex-column justify-content-center align-items-center">
-                            <img src="https://labourmarketinsights.gov.au/Content/assets/images/global/snapshot/employment-rate.svg"  alt="" class="snapshot-img" />
-
-                            <div class="insights-data pt-2">77.6%</div>
-                            <div class="insights-title">
-                                Employment Rate
-                            </div>
-                            <div class="insights-title">
-                                (15-64)
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xs-12 col-sm-12 col-md-2 mt-3">
-                        <div class="d-flex flex-column justify-content-center align-items-center">
-                            <img src="https://labourmarketinsights.gov.au/Content/assets/images/global/snapshot/participation-rate.svg"  alt="" class="snapshot-img" />
-                            <div class="insights-data pt-2">66.7%</div>
-                            <div class="insights-title">
-                                Participation Rate
-                            </div>
-                            <div class="insights-title">
-                                (15+)
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xs-12 col-sm-12 col-md-2 mt-3">
-                        <div class="d-flex flex-column justify-content-center align-items-center">
-                            <img src="https://labourmarketinsights.gov.au/Content/assets/images/global/snapshot/unemployment-rate.svg"  alt="" class="snapshot-img" />
-                            <div class="insights-data pt-2">3.5%</div>
-                            <div class="insights-title">
-                                Unemployment Rate
-                            </div>
-                            <div class="insights-title pb-2">
-                                (15+)
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xs-12 col-sm-12 col-md-3 mt-3">
-                        <div class="d-flex flex-column justify-content-center align-items-center">
-                            <img src="https://labourmarketinsights.gov.au/Content/assets/images/global/snapshot/youth-unemployment-rate.svg"  alt="" class="snapshot-img" />
-
-                            <div class="insights-data pt-2">7.8%</div>
-                            <div class="insights-title">
-                                Youth Unemployment Rate
-                            </div>
-                            <div class="insights-title pb-2">
-                                (15-24)
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
 </template>
 
 <script>
 export default {
   name: 'App',
-  components: {
-  }
 }
 </script>
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #161471;
-  margin-top: 60px;
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+    color: #161471;
+    margin-top: 50px
 }
-img{
+
+img {
     height: 50px;
 }
+
 h1 {
     p {
         margin-bottom: 0;

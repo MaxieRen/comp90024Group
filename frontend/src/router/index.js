@@ -1,23 +1,41 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import FirstView from '../components/FirstView.vue'
-import SecondView from '../components/SecondView.vue'
-import ThirdView from '../components/ThirdView.vue'
+import OverView from '../components/OverView.vue'
+import HomePage from '../components/HomePage.vue'
+import RegionView from '../components/RegionView.vue'
+import IndustView from '../components/IndustView.vue'
+import OccuView from '../components/OccuView.vue'
+import TweetView from '../components/TweetView.vue'
 
 const routes = [
     {
-      path: '/view1',
-      name: 'FirstView',
-      component: FirstView
+        path: '/Home',
+        name: 'HomePage',
+        component: HomePage
     },
     {
-      path: '/view2',
-      name: 'SecondView',
-      component: SecondView
+        path: '/view0',
+        name: 'OverView',
+        component: OverView
     },
     {
-      path: '/view3',
-      name: 'ThirdView',
-      component: ThirdView
+        path: '/RegionView',
+        name: 'RegionView',
+        component: RegionView
+    },
+    {
+      path: '/IndustView',
+      name: 'IndustView',
+      component: IndustView
+    },
+    {
+        path: '/OccuView',
+        name: 'OccuView',
+        component: OccuView
+    },
+    {
+        path: '/TweetView',
+        name: 'TweetView',
+        component: TweetView
     }
 ]
 
