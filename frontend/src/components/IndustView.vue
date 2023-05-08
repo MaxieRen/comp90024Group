@@ -7,7 +7,9 @@
         <button @click="updateChart" >更新图表</button>
         <ul>{{string}}</ul>
         <button @click="getData2">修改数据</button>
-
+        <img src="https://img.icons8.com/color-glass/96/null/happy.png"/>
+        <img src="https://img.icons8.com/color-glass/96/null/neutral-emoticon.png"/>
+        <img src="https://img.icons8.com/color-glass/96/null/sad.png"/>
         <div>
             <figure class="highcharts-figure">
                 <div id="container"></div>

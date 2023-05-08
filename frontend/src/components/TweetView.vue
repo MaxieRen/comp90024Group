@@ -8,6 +8,7 @@
         <div class="container-fluid" >
             <button @click="getData1">更新地图</button>
             <button @click="getData2">reset map</button>
+            <img src="https://img.icons8.com/nolan/512/1A6DFF/C822FF/twitter.png"/>
         </div>
 
         <h3>Twitter Analysis</h3>
