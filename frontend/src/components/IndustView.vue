@@ -4,6 +4,7 @@
         <div id="chart-1" class="chart">
             <highcharts :options="chartOptions"></highcharts>
         </div>
+        <button @click="getData1" >get test data</button>
         <button @click="updateChart" >更新图表</button>
         <ul>{{string}}</ul>
         <button @click="getData2">修改数据</button>
@@ -12,7 +13,7 @@
         <img src="https://img.icons8.com/color-glass/96/null/sad.png"/>
         <div>
             <figure class="highcharts-figure">
-                <div id="container"></div>
+                <div id="pie_container"></div>
                 <p class="highcharts-description">
                     This pie chart shows how the chart legend can be used to provide
                     information about the individual slices.
@@ -34,10 +35,11 @@ export default {
     },
     data() {
         return {
+            chartData : null,
             string: 'nothing',
             chartOptions: {
                 series: [{
-                    data: [5, 20, 36, 10, 10, 20]// sample data
+                    data: [5, 20, 36, 10, 10, 20,5, 20, 36, 10, 10, 20,5, 20, 36, 10, 10, 20,5, 20, 36, 10, 10, 20]// sample data
                 }]
             }
         };
@@ -45,14 +47,23 @@ export default {
     methods: {
         async getData1() {
             try {
-                const response = await axios.get('http://127.0.0.1:8081/api_2');
-                console.log(response.data);
+                const response = await axios.get('http://45.113.235.46:8081/api_0/Braidwood');
                 this.chartData = response.data;
-                this.updateChart();
+                console.log(this.chartData);
+                this.chartOptions = {
+                    xAxis:{
+                        categories: this.chartData.Date
+                    },
+                    series: [{
+                        name: 'rate',
+                        data: this.chartData.UnempRate
+                    }]
+                }
             } catch (error) {
                 console.log(error);
             }
         },
+
         async getData2() {
             try {
                 this.string = this.string + 'sth '
@@ -63,7 +74,7 @@ export default {
         updateChart() {
             this.chartOptions ={
                 title: {
-                    text: 'Monthly Average Temperature',
+                    text: 'Unemployment rate',
                         x: -20 //center
                 },
                 subtitle: {
@@ -111,7 +122,7 @@ export default {
         },
     },
     mounted() {
-        const chart =Highcharts.chart('container', {
+        const chart =Highcharts.chart('pie_container', {
             chart: {
                 plotBackgroundColor: null,
                 plotBorderWidth: null,

@@ -20,8 +20,17 @@
             <h3 class="text-center mb-3">
                 Employment Insights for Australia
             </h3>
-            <div class="container-fluid">
+            <div id="dashboard" class="container shadow-lg p-3 mb-5 bg-white rounded">
                 <div class="row mb-3">
+                    <div class="col-xs-12 col-sm-12 col-md-2 mt-3">
+                        <div class="d-flex flex-column justify-content-center align-items-center">
+                            <img src="https://img.icons8.com/nolan/512/1A6DFF/C822FF/twitter.png" alt="" class="snapshot-img" />
+                            <div class="insights-data pt-2">17,028,900</div>
+                            <div class="insights-title" >Related Twitter</div>
+                            <div class="insights-title pb-2">(2020 - now)</div>
+                        </div>
+                    </div>
+
                     <div class="col-xs-12 col-sm-12 col-md-3 mt-3">
                         <div class="d-flex flex-column justify-content-center align-items-center">
                             <img src="../assets/images/working-age-population.svg" alt="" class="snapshot-img" />
@@ -34,27 +43,9 @@
                     <div class="col-xs-12 col-sm-12 col-md-2 mt-3">
                         <div class="d-flex flex-column justify-content-center align-items-center">
                             <img src="https://labourmarketinsights.gov.au/Content/assets/images/global/snapshot/employment-rate.svg"  alt="" class="snapshot-img" />
-
                             <div class="insights-data pt-2">77.6%</div>
-                            <div class="insights-title">
-                                Employment Rate
-                            </div>
-                            <div class="insights-title">
-                                (15-64)
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xs-12 col-sm-12 col-md-2 mt-3">
-                        <div class="d-flex flex-column justify-content-center align-items-center">
-                            <img src="https://labourmarketinsights.gov.au/Content/assets/images/global/snapshot/participation-rate.svg"  alt="" class="snapshot-img" />
-                            <div class="insights-data pt-2">66.7%</div>
-                            <div class="insights-title">
-                                Participation Rate
-                            </div>
-                            <div class="insights-title">
-                                (15+)
-                            </div>
+                            <div class="insights-title">Employment Rate </div>
+                            <div class="insights-title">(15-64)</div>
                         </div>
                     </div>
 

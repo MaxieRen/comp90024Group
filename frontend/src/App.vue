@@ -18,16 +18,13 @@
                             <a class="nav-link" href="/view0">Overview</a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" href="/TweetView">Twitter Analysis</a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="/RegionView">Regions</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/IndustView">Industries</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/OccuView">Occupations</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/TweetView">Twitter Analysis</a>
                         </li>
                     </ul>
                 </div>
@@ -36,37 +33,6 @@
     </div>
 
     <router-view> </router-view>
-<!--    <div class="row no-gutters">-->
-<!--        <div class="col col-12">-->
-<!--            <ul class="nav nav-tabs explore-bar-tabs" id="explore-bar-tabs">-->
-<!--                <li class="nav-item explore-bar-tab">-->
-<!--                    <a class="nav-link active d-flex align-items-center px-4" href="#" data-toggle="tab" data-ga-event="{&quot;eventName&quot;:&quot;RegionsExploreBarItemClick&quot;,&quot;eventParameters&quot;:{&quot;event_category&quot;:&quot;ExploreBarEvents&quot;,&quot;event_label&quot;:&quot;Regions&quot;}}" data-ga-event-force-location="true">-->
-<!--                        <span class="region tab-icon"></span>-->
-<!--                        <span class="pl-3">-->
-<!--                            Regions-->
-<!--                        </span>-->
-<!--                    </a>-->
-<!--                </li>-->
-<!--                <li class="nav-item px-2 explore-bar-tab">-->
-<!--                    <a class="nav-link d-flex align-items-center px-4" href="#" data-toggle="tab" data-ga-event="{&quot;eventName&quot;:&quot;IndustriesExploreBarItemClick&quot;,&quot;eventParameters&quot;:{&quot;event_category&quot;:&quot;ExploreBarEvents&quot;,&quot;event_label&quot;:&quot;Industries&quot;}}" data-ga-event-force-location="true">-->
-<!--                        <span class="industry tab-icon"></span>-->
-<!--                        <span class="pl-3">-->
-<!--                            Industries-->
-<!--                        </span>-->
-<!--                    </a>-->
-<!--                </li>-->
-<!--                <li class="nav-item explore-bar-tab">-->
-<!--                    <a class="nav-link d-flex align-items-center px-4" href="#" data-toggle="tab" data-ga-event="{&quot;eventName&quot;:&quot;OccupationsExploreBarItemClick&quot;,&quot;eventParameters&quot;:{&quot;event_category&quot;:&quot;ExploreBarEvents&quot;,&quot;event_label&quot;:&quot;Occupations&quot;}}" data-ga-event-force-location="true">-->
-<!--                        <span class="occupation tab-icon"></span>-->
-<!--                        <span class="pl-3">-->
-<!--                            Occupations-->
-<!--                        </span>-->
-<!--                    </a>-->
-<!--                </li>-->
-
-<!--            </ul>-->
-<!--        </div>-->
-<!--    </div>-->
 
 
 </template>

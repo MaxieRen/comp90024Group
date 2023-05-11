@@ -3,7 +3,6 @@ import OverView from '../components/OverView.vue'
 import HomePage from '../components/HomePage.vue'
 import RegionView from '../components/RegionView.vue'
 import IndustView from '../components/IndustView.vue'
-import OccuView from '../components/OccuView.vue'
 import TweetView from '../components/TweetView.vue'
 
 const routes = [
@@ -26,11 +25,6 @@ const routes = [
       path: '/IndustView',
       name: 'IndustView',
       component: IndustView
-    },
-    {
-        path: '/OccuView',
-        name: 'OccuView',
-        component: OccuView
     },
     {
         path: '/TweetView',
