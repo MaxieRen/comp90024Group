@@ -1,0 +1,13 @@
+version: '3.7'
+
+services:
+  harvester:
+    image: mastodon_image_v1
+    container_name: {{container_name}}
+    environment:
+        DB_USERNAME: {{db_username}}
+        DB_PASSWORD: {{db_password}}
+        DB_NAME: {{db_name}}
+        DB_IP: {{db_ip}}
+        MASTODON_SERVER: {{mastodon_server}}
+        MASTODON_TOKEN: {{mastodon_token}}

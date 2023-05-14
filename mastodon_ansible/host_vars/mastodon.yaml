@@ -1,0 +1,10 @@
+---
+mastodon_dir: mastodon
+db_username: admin
+db_password: password
+db_name: mastodon_ansible
+db_ip: 172.26.135.248
+mastodon_server: aus.social
+mastodon_token: AvLtf57hHjGtSP5Qq_t-UyAfVABievlLY9Toba3RkZ8
+ansible_user: ubuntu
+container_name: mastodon_client 
