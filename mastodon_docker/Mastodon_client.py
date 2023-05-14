@@ -1,4 +1,3 @@
-#!/usr/bin/env python3
 import couchdb
 from mastodon import Mastodon, StreamListener
 import json
@@ -7,6 +6,7 @@ import nltk
 from nltk.sentiment import SentimentIntensityAnalyzer
 import datetime
 import argparse
+import os
 
 nltk.download('vader_lexicon')
 
@@ -92,9 +92,22 @@ parser.add_argument('--server', type=str, default='aus.social', help='mastodon s
 parser.add_argument('--token', type=str, default='AvLtf57hHjGtSP5Qq_t-UyAfVABievlLY9Toba3RkZ8', help='mastodon token')
 args = parser.parse_args()
 
+# DB_USERNAME = os.getenv('DB_USERNAME', 'admin')
+# DB_PASSWORD = os.getenv('DB_PASSWORD', 'password')
+# DB_NAME = os.getenv('DB_NAME', 'mastodon_social_cleandata')
+# DB_IP = os.getenv('DB_IP', '172.26.135.248')
+# MASTODON_SERVER = os.getenv('MASTODON_SERVER', 'aus.social')
+# MASTODON_TOKEN = os.getenv('MASTODON_TOKEN', 'AvLtf57hHjGtSP5Qq_t-UyAfVABievlLY9Toba3RkZ8')
+
+# db = ConnectCouchDB(DB_USERNAME, DB_PASSWORD, DB_IP)
+# db_handle = db.createDB(db.connect(), DB_NAME)
+# mastodon = connectMastodon(MASTODON_SERVER, MASTODON_TOKEN)
+# mastodon.stream_public(Listener(db_handle))
+
 db = ConnectCouchDB(args.user, args.password, args.ip)
 db_handle = db.createDB(db.connect(), args.dbName)
 mastodon = connectMastodon(args.server, args.token)
 mastodon.stream_public(Listener(db_handle))
+
 # nohup python3 Mastodon_client.py --user admin --password password --dbName mastodon_social_cleandata --ip 127.0.0.1 --server aus.social --token AvLtf57hHjGtSP5Qq_t-UyAfVABievlLY9Toba3RkZ8 2>&1 & 
 
