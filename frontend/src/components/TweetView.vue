@@ -8,9 +8,8 @@
                         <figure class="highcharts-figure">
                             <div id="mast-word-cloud-container"></div>
                             <p class="highcharts-description">
-                                Word clouds are used to visualize how often each word in a
-                                text occurs. This example uses an excerpt from the book
-                                Alice's Adventures in Wonderland. Words that appear often will appear
+                                Word clouds are used to visualize how often each word in all
+                                twooters occurs. Words that appear often will appear
                                 larger.
                             </p>
                         </figure>
@@ -21,9 +20,8 @@
                         <figure class="highcharts-figure">
                             <div id="tweets-word-cloud-container"></div>
                             <p class="highcharts-description">
-                                Word clouds are used to visualize how often each word in a
-                                text occurs. This example uses an excerpt from the book
-                                Alice's Adventures in Wonderland. Words that appear often will appear
+                                Word clouds are used to visualize how often each word in all
+                                tweets occurs. Words that appear often will appear
                                 larger.
                             </p>
                         </figure>
@@ -36,11 +34,11 @@
             <div class="row">
                 <div class="col">
                     <div id="sentiment" class="row shadow-lg p-2 bg-white rounded" style="height:250px;">
-                        <h4>Over-all Sentiment</h4>
+                        <h4>Over-all Sentiment (Mastodon)</h4>
                         <div class="col">
                             <div class="d-flex flex-column justify-content-center align-items-center">
                                 <img src="https://img.icons8.com/external-filled-outline-design-circle/64/external-Twitter-website-communication-filled-outline-design-circle.png"/>
-                                <div class="insights-data pt-2">17,028,900</div>
+                                <div class="insights-data pt-2">{{twoots}}</div>
                                 <div class="insights-title" >Total Tooters</div>
                             </div>
                         </div>
@@ -70,23 +68,20 @@
                 </div>
             </div>
         </div>
-        <ul>
-            <li v-for="(item, index) in valdata" :key="index">{{ item }}</li> <!-- dynamically updated -->
-        </ul>
+
+<!--        <ul>-->
+<!--            <li v-for="(item, index) in valdata" :key="index">{{ item }}</li> &lt;!&ndash; dynamically updated &ndash;&gt;-->
+<!--        </ul>-->
+
         <div id="buttons" class="container-fluid">
-            <button @click="getData1"> update </button>
-            <!--            <button @click="getData3" >reset</button>-->
+            <button @click="getCount" >update</button>
         </div>
 
         <div id="overview-chart1-container" class="container">
             <figure class="highcharts-figure">
                 <div id="time-container" style="width:100%; height:400px;"></div>
-                <button @click="getData2" >update</button>
                 <p class="highcharts-description">
-                    Chart showing how different series types can be combined in a single
-                    chart. The chart is using a set of column series, overlaid by a line and
-                    a pie series. The line is illustrating the column averages, while the
-                    pie is illustrating the column totals.
+                    Chart showing the total number of twoots/tweets in different time blocks.
                 </p>
             </figure>
         </div>
@@ -106,61 +101,17 @@ export default {
     },
     data() {
         return {
+            twoots:null,
             chart: null,
             valdata: [56,41,53,37,43]
         };
     },
     async created(){
-        const tweetAT = await axios.get('http://45.113.235.46:8081/mastodon_activation_time/');
-        const mastAT = await axios.get('http://45.113.235.46:8081/mastodon_activation_time/');
+        const mastCount  = await  axios.get('http://115.146.92.228:8081/count_mastodon/');
+        this.twoots = mastCount.data;
 
-        Highcharts.chart( "time-container",{
-            chart: {
-                type: 'column'
-            },
-            title: {
-                text: 'Activation Time'
-            },
-            subtitle: {
-                text: 'Source: Twitter + Mastodon'
-            },
-            xAxis: {
-                categories: ['9am - 3pm','3pm - 9pm','9pm - 3am','3am - 9am'],
-                    crosshair: true
-            },
-            yAxis: {
-                min: 0,
-                    title: {
-                    text: 'Time ( 24 hr)'
-                }
-            },
-            tooltip: {
-                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                '<td style="padding:0"><b>{point.y:1f} </b></td></tr>',
-                    footerFormat: '</table>',
-                    shared: true,
-                    useHTML: true
-            },
-            plotOptions: {
-                column: {
-                    pointPadding: 0.2,
-                        borderWidth: 0
-                }
-            },
-            series: [{
-                name: 'Twoots',
-                data: mastAT.data
-
-            }, {
-                name: 'Tweets',
-                data: mastAT.data
-
-            }]
-        })
-
-        const mastWC = await axios.get('http://45.113.235.46:8081/api_word_cloud/');
-        const tweetWC =await  axios.get('http://45.113.235.46:8081/total_word_collect')
+        const mastWC = await axios.get('http://115.146.92.228:8081/api_word_cloud/');
+        const tweetWC =await  axios.get('http://115.146.92.228:8081/total_word_collect')
         loadWordcloud(Highcharts);
         Highcharts.chart('mast-word-cloud-container', {
             accessibility: {
@@ -214,74 +165,64 @@ export default {
                 headerFormat: '<span style="font-size: 16px"><b>{point.key}</b></span><br>'
             }
         });
+
+        const tweetAT = await axios.get('http://115.146.92.228:8081/active_time_all_twitter/');
+        const mastAT = await axios.get('http://115.146.92.228:8081/mastodon_activation_time/');
+
+        Highcharts.chart( "time-container",{
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Activation Time'
+            },
+            subtitle: {
+                text: 'Source: Twitter + Mastodon'
+            },
+            xAxis: {
+                categories: ['3am - 9am','9am - 3pm','3pm - 9pm','9pm - 3am'],
+                    crosshair: true
+            },
+            yAxis: {
+                min: 0,
+                    title: {
+                    text: 'Time ( 24 hr)'
+                }
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0"><b>{point.y:1f} </b></td></tr>',
+                    footerFormat: '</table>',
+                    shared: true,
+                    useHTML: true
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                        borderWidth: 0
+                }
+            },
+            series: [{
+                name: 'Twoots',
+                data: mastAT.data
+
+            }, {
+                name: 'Tweets',
+                data: tweetAT.data
+
+            }]
+        })
+
+
     },
     methods: {
-        async getData1() { // get data 1 method calls api GET that backends implemented
-            try {
-                const mastWC = await axios.get('http://45.113.235.46:8081/api_word_cloud/');
-                const tweetWC =await  axios.get('http://45.113.235.46:8081/total_word_collect')
-
-                loadWordcloud(Highcharts);
-                Highcharts.chart('mast-word-cloud-container', {
-                    accessibility: {
-                        screenReaderSection: {
-                            beforeChartFormat: '<h5>{chartTitle}</h5>' +
-                                '<div>{chartSubtitle}</div>' +
-                                '<div>{chartLongdesc}</div>' +
-                                '<div>{viewTableButton}</div>'
-                        }
-                    },
-                    series: [{
-                        type: 'wordcloud',
-                        data: mastWC.data,
-                        name: 'Occurrences'
-                    }],
-                    title: {
-                        text: 'Twoots Word cloud 2023',
-                        align: 'left'
-                    },
-                    subtitle: {
-                        text: 'Mastodon',
-                        align: 'left'
-                    },
-                    tooltip: {
-                        headerFormat: '<span style="font-size: 16px"><b>{point.key}</b></span><br>'
-                    }
-                });
-
-                Highcharts.chart('tweets-word-cloud-container', {
-                    accessibility: {
-                        screenReaderSection: {
-                            beforeChartFormat: '<h5>{chartTitle}</h5>' +
-                                '<div>{chartSubtitle}</div>' +
-                                '<div>{chartLongdesc}</div>' +
-                                '<div>{viewTableButton}</div>'
-                        }
-                    },
-                    series: [{
-                        type: 'wordcloud',
-                        data:tweetWC.data,
-                        name: 'Occurrences'
-                    }],
-                    title: {
-                        text: 'Tweets Word cloud 2022',
-                        align: 'left'
-                    },
-                    subtitle: {
-                        text: 'Twitter',
-                        align: 'left'
-                    },
-                    tooltip: {
-                        headerFormat: '<span style="font-size: 16px"><b>{point.key}</b></span><br>'
-                    }
-                });
-            } catch (error) {
-                console.log(error);
-            }
+        async getCount(){
+            const mastCount  = await  axios.get('http://115.146.92.228:8081/count_mastodon/');
+            this.twoots = mastCount.data;
         },
         async getData2() {
             try {
-
                 const colors = Highcharts.getOptions().colors.map(color =>
                     Highcharts.color(color).setOpacity(0.5).get()
                 );

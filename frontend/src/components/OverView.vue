@@ -4,9 +4,9 @@
         <figure class="highcharts-figure">
             <div id="aus-20years-container" style="width:100%; height:400px;"></div>
             <p class="highcharts-description" align="left">
-                Bar chart showing horizontal columns. This chart type is often
-                beneficial for smaller screens, as the user can scroll through the data
-                vertically, and axis labels are easy to read.
+                The chart above gives a high level view of unemployment during events like the:
+                Global Financial Crisis (GFC) from mid-2007 to early 2009;
+                Mining boom in the 2010s; and the COVID-19 pandemic from early 2020.
             </p>
         </figure>
     </div>
@@ -21,9 +21,9 @@
                     <div class="col-xs-12 col-sm-12 col-md-2 mt-3">
                         <div class="d-flex flex-column justify-content-center align-items-center">
                             <img src="https://img.icons8.com/nolan/512/1A6DFF/C822FF/twitter.png" alt="" class="snapshot-img" />
-                            <div class="insights-data pt-2">17,028,900</div>
-                            <div class="insights-title" >Related Twitter</div>
-                            <div class="insights-title pb-2">(2020 - now)</div>
+                            <div class="insights-data pt-2">{{size}}</div>
+                            <div class="insights-title" >Twitter Numbers</div>
+                            <div class="insights-title pb-2">(2022 - now)</div>
                         </div>
                     </div>
 
@@ -78,30 +78,28 @@
 
     <div id="analysis" class="container" align="left" style="height:300px;">
         <h4 class="card-title">
-            We research and analyse employment dynamics across groups, industries, occupations and regions.
-            We share what we have learnt so you can make informed decisions.</h4>
+            Summary:</h4>
         <p class="card-text">
             <ul>
-                <li>Stay up-to-date with conditions in your local labour market</li>
-                <li>Identify jobs and skills in-demand</li>
-                <li>Understand employer needs and recruitment trends</li>
-                <li>Explore the trends impacting the jobs market now and into the future.</li>
+                <li>A person is considered employed if they are aged 15 years and over and work for an hour or more for pay,
+                    profit, commission or payment in kind during the ABS Labour Force Survey reference week.</li>
+                <li>A person is considered unemployed if they are not employed,
+                    have actively looked for work at some time in the last four weeks,
+                    and are currently available for work.</li>
+                <li> The unemployment rate refers to the number of unemployed people expressed
+                    as a proportion of the total labour force (employed and unemployed).</li>
+                <li>The youth unemployment rate refers to the number of unemployed young people (aged 15-24 years old) expressed as
+                    a proportion of the labour force aged 15-24 years old (employed and unemployed).</li>
             </ul>
         </p>
     </div>
 
-    <div id="chart1-container" class="container">
+    <div id="age-container" class="container">
         <figure class="highcharts-figure">
             <highcharts :options="chartOptions"></highcharts>
             <p class="highcharts-description" align="left">
-                Chart showing how different series types can be combined in a single
-                chart. The chart is using a set of column series, overlaid by a line and
-                a pie series. The line is illustrating the column averages, while the
-                pie is illustrating the column totals.
-            </p>
-            <p class="highcharts-description" align="left">
-                The number of people either working or looking for work (i.e. the labour force) expressed as a proportion of the civilian population (15 years and over).
-                Those not in the labour force include people studying, caring for children at home, retired, experiencing a health condition or injury, or volunteering.
+                Chart showing how many people are employed/unemployed in different age group.
+                <br>{{analysis}}
             </p>
         </figure>
     </div>
@@ -117,7 +115,6 @@
 <script>
 import axios from "axios";
 import Highcharts from "highcharts";
-import {Chart} from "highcharts-vue";
 
 export default {
     name: 'OverView',
@@ -126,7 +123,8 @@ export default {
     },
     data() {
         return {
-            data: [],
+            size:null,
+            analysis:'',
             string:'',
             chartOptions : {
                 title: {
@@ -209,11 +207,14 @@ export default {
         }
     },
     async created() {
-        const time = await axios.get('http://45.113.235.46:8081/api_overview/time');
-        const female = await axios.get('http://45.113.235.46:8081/api_overview/female_unemployment_rate');
-        const male= await axios.get('http://45.113.235.46:8081/api_overview/male_unemployment_rate');
-        const youth= await axios.get('http://45.113.235.46:8081/api_overview/youth_unemployment_rate');
-        const aus = await axios.get('http://45.113.235.46:8081/api_overview/unemployment_rate');
+        const count  = await  axios.get('http://115.146.92.228:8081/count_mastodon_twitter/');
+        this.size = count.data;
+
+        const time = await axios.get('http://115.146.92.228:8081/api_overview/time');
+        const female = await axios.get('http://115.146.92.228:8081/api_overview/female_unemployment_rate');
+        const male= await axios.get('http://115.146.92.228:8081/api_overview/male_unemployment_rate');
+        const youth= await axios.get('http://115.146.92.228:8081/api_overview/youth_unemployment_rate');
+        const aus = await axios.get('http://115.146.92.228:8081/api_overview/unemployment_rate');
 
         Highcharts.chart('aus-20years-container',{
             title: {
@@ -268,10 +269,10 @@ export default {
     methods: {
         async getEmp() {
             try {
-                const emp2019 = await axios.get('http://45.113.235.46:8081/age_population/2019/employed');
-                const emp2020 = await axios.get('http://45.113.235.46:8081/age_population/2020/employed');
-                const emp2021 = await axios.get('http://45.113.235.46:8081/age_population/2021/employed');
-                const emp2022 = await axios.get('http://45.113.235.46:8081/age_population/2022/employed');
+                const emp2019 = await axios.get('http://115.146.92.228:8081/age_population/2019/employed');
+                const emp2020 = await axios.get('http://115.146.92.228:8081/age_population/2020/employed');
+                const emp2021 = await axios.get('http://115.146.92.228:8081/age_population/2021/employed');
+                const emp2022 = await axios.get('http://115.146.92.228:8081/age_population/2022/employed');
 
                 this.chartOptions = {
                     title: {
@@ -313,17 +314,18 @@ export default {
                         }]
                 };
                 this.string = "Updated!"
+                this.analysis="Most people employed are between age 25 - 54 years."
             } catch (error) {
                 console.log(error);
             }
         },
         async getUnemp() {
             try {
-                const unemp2019 = await axios.get('http://45.113.235.46:8081/age_population/2019/unemployed');
-                const unemp2020 = await axios.get('http://45.113.235.46:8081/age_population/2020/unemployed');
-                const unemp2021 = await axios.get('http://45.113.235.46:8081/age_population/2021/unemployed');
-                const unemp2022 = await axios.get('http://45.113.235.46:8081/age_population/2022/unemployed');
-                // this.data = response.data;
+                const unemp2019 = await axios.get('http://115.146.92.228:8081/age_population/2019/unemployed');
+                const unemp2020 = await axios.get('http://115.146.92.228:8081/age_population/2020/unemployed');
+                const unemp2021 = await axios.get('http://115.146.92.228:8081/age_population/2021/unemployed');
+                const unemp2022 = await axios.get('http://115.146.92.228:8081/age_population/2022/unemployed');
+
                 this.chartOptions = {
                     title: {
                         text: 'Age Population (Unemployment)',
@@ -358,9 +360,15 @@ export default {
                             }
                         }]
                 };
+
+                this.analysis="People in 15 - 24 years group have higher unemployment rate."
             } catch (error) {
                 console.log(error);
             }
+        },
+        async getCount(){
+            const count  = await  axios.get('http://115.146.92.228:8081/count_mastodon_twitter/');
+            this.size = count.data;
         }
     }
 
