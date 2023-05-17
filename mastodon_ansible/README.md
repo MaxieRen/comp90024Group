@@ -2,4 +2,5 @@
 - `sudo pip install docker`
 - `sudo pip install docker-compose`
 - `ansible-playbook harvester.yaml`
+- `pip3 install Mastodon.py`
 - change configurations in `mastodon_ansible/host_vars/mastodon.yaml` to create different servers
