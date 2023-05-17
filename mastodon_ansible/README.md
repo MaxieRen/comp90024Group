@@ -1,3 +1,5 @@
 - make sure you already build the image before you run the ansible-playbook
+- `sudo pip install docker`
+- `sudo pip install docker-compose`
 - `ansible-playbook harvester.yaml`
 - change configurations in `mastodon_ansible/host_vars/mastodon.yaml` to create different servers
