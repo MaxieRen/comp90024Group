@@ -1,24 +1,43 @@
 <template>
     <div>
         <h1>Industries</h1>
-        <div id="chart-1" class="chart">
+        <div id="chart-1" class="container">
             <highcharts :options="chartOptions"></highcharts>
         </div>
         <button @click="getData1" >get test data</button>
         <button @click="updateChart" >更新图表</button>
-        <ul>{{string}}</ul>
         <button @click="getData2">修改数据</button>
-        <img src="https://img.icons8.com/color-glass/96/null/happy.png"/>
-        <img src="https://img.icons8.com/color-glass/96/null/neutral-emoticon.png"/>
-        <img src="https://img.icons8.com/color-glass/96/null/sad.png"/>
-        <div>
-            <figure class="highcharts-figure">
-                <div id="pie_container"></div>
-                <p class="highcharts-description">
-                    This pie chart shows how the chart legend can be used to provide
-                    information about the individual slices.
-                </p>
-            </figure>
+        <ul>{{string}}</ul>
+
+
+        <div class="container-lg py-4">
+            <div class="row">
+                <div class="col">
+                    <figure class="highcharts-figure">
+                        <div id="pie_container"></div>
+<!--                        <p class="highcharts-description">-->
+<!--                            This pie chart shows how the chart legend can be used to provide-->
+<!--                            information about the individual slices.-->
+<!--                        </p>-->
+                    </figure>
+                </div>
+                <div class="col">
+                    <figure class="highcharts-figure">
+
+                        <p class="card-title">
+                            <ul>
+                                <li>Stay up-to-date with conditions in your local labour market</li>
+                                <li>Identify jobs and skills in-demand</li>
+                                <li>Understand employer needs and recruitment trends</li>
+                                <li>Explore the trends impacting the jobs market now and into the future.</li>
+                            </ul>
+                        </p>
+                    </figure>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+
         </div>
     </div>
 </template>
@@ -185,14 +204,6 @@ export default {
 <style scoped>
 h3 {
     margin: 40px 0 0;
-}
-ul {
-    list-style-type: none;
-    padding: 0;
-}
-li {
-    display: inline-block;
-    margin: 0 10px;
 }
 
 button{

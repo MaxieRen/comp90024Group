@@ -2,7 +2,6 @@ import { createRouter, createWebHistory } from 'vue-router'
 import OverView from '../components/OverView.vue'
 import HomePage from '../components/HomePage.vue'
 import RegionView from '../components/RegionView.vue'
-import IndustView from '../components/IndustView.vue'
 import TweetView from '../components/TweetView.vue'
 
 const routes = [
@@ -20,11 +19,6 @@ const routes = [
         path: '/RegionView',
         name: 'RegionView',
         component: RegionView
-    },
-    {
-      path: '/IndustView',
-      name: 'IndustView',
-      component: IndustView
     },
     {
         path: '/TweetView',

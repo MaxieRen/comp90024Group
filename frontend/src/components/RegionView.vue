@@ -1,268 +1,521 @@
 <template>
+
     <div>
-        <h2>All Regions (ABS SA4)</h2>
-        <div id="overview-chart1-container">
-            <figure class="highcharts-figure">
-                <highcharts :options="chartOptions"></highcharts>
-                <p class="highcharts-description">
-                    Chart showing how different series types can be combined in a single
-                    chart. The chart is using a set of column series, overlaid by a line and
-                    a pie series. The line is illustrating the column averages, while the
-                    pie is illustrating the column totals.
-                </p>
-            </figure>
+        <div>
+            <div class="container"  id = "map-container"> </div>
+        </div>
+        <div class="container-fluid" id="button-container">
+<!--            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">Year</button>-->
+<!--            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">-->
+<!--                <li><a class="dropdown-item" @click="getData1">2022</a></li>-->
+<!--                <li><a class="dropdown-item" @click="getData1">2023</a></li>-->
+<!--            </ul>-->
+            <button @click="getData1">Update</button>
+            <button @click="getData2">Reset</button>
+            <button @click="getData2">Update</button>
         </div>
 
-        <ul>
-            <li v-for="(item, index) in data" :key="index">{{ item }}</li> <!-- dynamically updated -->
-        </ul>
-        <div class="container-fluid">
-            <button @click="getData1">获取数据</button>
-            <button @click="getData2" >update</button>
-            <button @click="getData3" >获取数据</button>
+
+        <h3>Insights Analysis</h3>
+        <ul>{{string}}</ul>
+        <div id="dashboard" class="container shadow-lg p-3 mb-5 bg-white rounded">
+            <div class="row mb-3">
+                <div class="col-xs-12 col-sm-12 col-md-2 mt-3">
+                    <div class="d-flex flex-column justify-content-center align-items-center">
+                        <img src="https://img.icons8.com/nolan/512/1A6DFF/C822FF/twitter.png" alt="" class="snapshot-img" />
+                        <div class="insights-data pt-2">17,028,900</div>
+                        <div class="insights-title" >Twitter User</div>
+                        <div class="insights-title pb-2">(2022 only)</div>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-12 col-md-3 mt-3">
+                    <div class="d-flex flex-column justify-content-center align-items-center">
+                        <img src="../assets/images/working-age-population.svg" alt="" class="snapshot-img" />
+                        <div class="insights-data pt-2">17,028,900</div>
+                        <div class="insights-title" >Working Age Population</div>
+                        <div class="insights-title pb-2">(15-64)</div>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-12 col-md-2 mt-3">
+                    <div class="d-flex flex-column justify-content-center align-items-center">
+                        <img src="https://labourmarketinsights.gov.au/Content/assets/images/global/snapshot/employment-rate.svg"  alt="" class="snapshot-img" />
+                        <div class="insights-data pt-2">77.6%</div>
+                        <div class="insights-title">Employment Rate </div>
+                        <div class="insights-title">(15-64)</div>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-12 col-md-2 mt-3">
+                    <div class="d-flex flex-column justify-content-center align-items-center">
+                        <img src="https://labourmarketinsights.gov.au/Content/assets/images/global/snapshot/unemployment-rate.svg"  alt="" class="snapshot-img" />
+                        <div class="insights-data pt-2">3.5%</div>
+                        <div class="insights-title">
+                            Unemployment Rate
+                        </div>
+                        <div class="insights-title pb-2">
+                            (15+)
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-12 col-sm-12 col-md-3 mt-3">
+                    <div class="d-flex flex-column justify-content-center align-items-center">
+                        <img src="https://labourmarketinsights.gov.au/Content/assets/images/global/snapshot/youth-unemployment-rate.svg"  alt="" class="snapshot-img" />
+
+                        <div class="insights-data pt-2">7.8%</div>
+                        <div class="insights-title">
+                            Youth Unemployment Rate
+                        </div>
+                        <div class="insights-title pb-2">
+                            (15-24)
+                        </div>
+                    </div>
+                </div>
+
+            </div>
         </div>
-        <div class = "container-fluid">
-            <figure class="highcharts-figure">
-                <div id="chart-container" style="width:100%; height:400px;"></div>
-                <p class="highcharts-description">
-                    Bar chart showing horizontal columns. This chart type is often
-                    beneficial for smaller screens, as the user can scroll through the data
-                    vertically, and axis labels are easy to read.
-                </p>
-            </figure>
+
+
+        <div id="2-cards" class="container-lg py-4">
+            <div class="row">
+                <div class="col">
+                    <div id="analysis" class="container" align="left" style="height:300px;">
+                        <h4 class="card-title">
+                            We research and analyse employment dynamics across groups, industries, occupations and regions.</h4>
+                        <p class="card-text">
+                            <ul>
+                                <li>Stay up-to-date with conditions in your local labour market</li>
+                                <li>Identify jobs and skills in-demand</li>
+                                <li>Understand employer needs and recruitment trends</li>
+                                <li>Explore the trends impacting the jobs market now and into the future.</li>
+                            </ul>
+                        </p>
+                    </div>
+                </div>
+                <div class="col">
+                    <div id="activation time" class="row shadow-lg p-2 bg-white rounded" style="height:260px;">
+                        <h4>Activation Time </h4>
+                        <p>{{string}}</p>
+                        <div class="col">
+                            <div class="d-flex flex-column justify-content-center align-items-center">
+                                <img src="https://img.icons8.com/dusk/64/sunrise.png" alt="sunrise"/>
+                                <div class="insights-data pt-2">17,028,900</div>
+                                <div class="insights-title" >3am - 9am</div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="d-flex flex-column justify-content-center align-items-center">
+                                <img src="https://img.icons8.com/dusk/64/smiling-sun.png" alt="smiling-sun"/>
+                                <div class="insights-data pt-2">17,028,900</div>
+                                <div class="insights-title" >9am - 3pm</div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="d-flex flex-column justify-content-center align-items-center">
+                                <img src="https://img.icons8.com/dusk/64/sunset.png" alt="sunset"/>
+                                <div class="insights-data pt-2">17,028,900</div>
+                                <div class="insights-title">3pm - 9pm</div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="d-flex flex-column justify-content-center align-items-center">
+                                <img src="https://img.icons8.com/dusk/64/bright-moon.png" alt="bright-moon"/>
+                                <div class="insights-data pt-2">17,028,900</div>
+                                <div class="insights-title">9pm - 3am </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="charts" class="container-lg py-4">
+            <div class="row">
+                <div class="col">
+                    <figure class="highcharts-figure">
+                        <div id="age-container" style="width:100%; height:400px;"></div>
+                        <p class="highcharts-description">
+                        </p>
+                    </figure>
+                </div>
+                <div class="col">
+                    <figure class="highcharts-figure">
+                        <div id="wc-container" style="width:100%; height:400px;"></div>
+                        <p class="highcharts-description">
+                        </p>
+                    </figure>
+                </div>
+            </div>
+            <p>{{string0}}</p>
         </div>
     </div>
 </template>
 
 <script>
 import axios from 'axios';
-import {Chart} from 'highcharts-vue';
+import mapboxgl from 'mapbox-gl';
+import "mapbox-gl/dist/mapbox-gl.css";
 import Highcharts from "highcharts";
+import loadWordcloud from "highcharts/modules/wordcloud";
 
 export default {
-    name: 'RegionView',
-
+    name: 'TweetView',
     props: {
         msg: String
     },
     data() {
         return {
-            chart:null,
-            data: [56,41,53,37,43],
-            chartOptions :{
-                title: {
-                    text: 'Employment Rate',
-                    x: -20 //center
-                },
-                subtitle: {
-                    text: 'Source: WorldClimate.com',
-                    x: -20
-                },
-                xAxis: {
-                    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-                },
-                yAxis: {
-                    title: {
-                        text: 'Temperature (°C)'
-                    },
-                    plotLines: [{
-                        value: 0,
-                        width: 1,
-                        color: '#808080'
-                    }]
-                },
-                tooltip: {
-                    valueSuffix: '°C'
-                },
-                legend: {
-                    layout: 'vertical',
-                    align: 'right',
-                    verticalAlign: 'middle',
-                    borderWidth: 0
-                },
-                series: [{
-                    name: 'Male',
-                    data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
-                }, {
-                    name: 'Female',
-                    data: [-0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5]
-                }, {
-                    name: 'youth',
-                    data: [-0.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6, 17.9, 14.3, 9.0, 3.9, 1.0]
-                }, {
-                    name: 'adult',
-                    data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
-                }]
-            },
+            data: [],
+            map: null,
+            mapData: null,
+            string:' ',
+            string0:' '
         };
     },
     methods: {
-        async getData1() { // get data 1 method calls api GET that backends implemented
+        async getData1() {
             try {
-                this.data = [56,41,53,36,43];
+                // const response = await axios.get('http://127.0.0.1:8081/api_1');
+                // console.log(response.data);
+                // this.data = response.data;
+
             } catch (error) {
                 console.log(error);
             }
         },
         async getData2() {
             try {
-                // const response = await axios.post('http://127.0.0.1:8081/api_1');
-                // console.log(response.data);
-                // this.data = response.data;
-                this.chartOptions = {
-                    title: {
-                        text: 'Unmployment Rate',
-                        x: -20 //center
-                    },
-                    subtitle: {
-                        text: 'Source: WorldClimate.com',
-                        x: -20
-                    },
-                    xAxis: {
-                        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-                            'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
-                        ]
-                    },
-                    yAxis: {
-                        title: {
-                            text: 'Temperature (°C)'
-                        },
-                        plotLines: [{
-                            value: 0,
-                            width: 1,
-                            color: '#808080'
-                        }]
-                    },
-                    tooltip: {
-                        valueSuffix: '°C'
-                    },
-                    legend: {
-                        layout: 'vertical',
-                        align: 'right',
-                        verticalAlign: 'middle',
-                        borderWidth: 0
-                    },
-                    series: [{
-                        name: 'Male',
-                        data: [4.4,5,20.4,18.5,13,7.2,9,14,11,8,6,3.4]
-                    }, {
-                        name: 'Female',
-                        data: [-11,4.5,-9,8.3,19.4,6.7,2.1,4.8,10,14.5,12,20.2]
-                    }, {
-                        name: 'youth',
-                        data: [5,5,11,9,14,14,0,3,7,10,6,4]
-                    }, {
-                        name: 'adult',
-                        data: [3,0,5,13,17,9,2,19,14,4,1,16]
-                    }]
-                };
-            } catch (error) { 
-                console.log(error);
-            }
-        },
-        async getData3() {
-            try {
-                this.data = [1,2,3,4,5,6,7,8];
+                const response = await axios.get('http://45.113.235.46:8081/api_1');
+                console.log(response.data.features);
+                this.data = response.data;
             } catch (error) {
                 console.log(error);
             }
-        }
+        },
+        async getSA4WC(x,y) {
+            try {
+                const response = await axios.get('http://45.113.235.46:8081/api_word_cloud_twitter/'+x);
+                const mastWC= response.data;
+
+                loadWordcloud(Highcharts);
+                Highcharts.chart('wc-container', {
+                    accessibility: {
+                        screenReaderSection: {
+                            beforeChartFormat: '<h5>{chartTitle}</h5>' +
+                                '<div>{chartSubtitle}</div>' +
+                                '<div>{chartLongdesc}</div>' +
+                                '<div>{viewTableButton}</div>'
+                        }
+                    },
+                    series: [{
+                        type: 'wordcloud',
+                        data:mastWC,
+                        name: 'Occurrences'
+                    }],
+                    title: {
+                        text: 'Tweets Word cloud',
+                        align: 'left'
+                    },
+                    subtitle: {
+                        text: 'Area: '+y,
+                        align: 'left'
+                    },
+                    tooltip: {
+                        headerFormat: '<span style="font-size: 16px"><b>{point.key}</b></span><br>'
+                    }
+                });
+            } catch (error) {
+                console.log(error);
+            }
+        },
+        async getSA4age(x,y) {
+            try {
+                const ageFemales = await axios.get('http://45.113.235.46:8081/unemployment_age/'+x+'/Females');
+                const ageMales = await axios.get('http://45.113.235.46:8081/unemployment_age/'+x+'/Males');
+                console.log(ageFemales);
+                console.log(ageMales.data);
+                Highcharts.chart('age-container', {
+                    chart: {
+                        type: 'column'
+                    },
+                    title: {
+                        text: 'Unemployment by Age',
+                        align: 'left'
+                    },
+                    subtitle: {
+                        text: 'Area: '+y,
+                        align: 'left'
+                    },
+                    xAxis: {
+                        categories: ['15-24 years', '25-34 years', '35-44 years', '45-54 years','55-64 years','65+ years']
+                    },
+                    yAxis: {
+                        min: 0,
+                        title: {
+                            text: 'Population'
+                        },
+                        stackLabels: {
+                            enabled: true,
+                            style: {
+                                fontWeight: 'bold',
+                                color: ( // theme
+                                    Highcharts.defaultOptions.title.style &&
+                                    Highcharts.defaultOptions.title.style.color
+                                ) || 'gray',
+                                textOutline: 'none'
+                            }
+                        }
+                    },
+                    legend: {
+                        align: 'left',
+                        x: 70,
+                        verticalAlign: 'top',
+                        y: 70,
+                        floating: true,
+                        backgroundColor:
+                            Highcharts.defaultOptions.legend.backgroundColor || 'white',
+                        borderColor: '#CCC',
+                        borderWidth: 1,
+                        shadow: false
+                    },
+                    tooltip: {
+                        headerFormat: '<b>{point.x}</b><br/>',
+                        pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
+                    },
+                    plotOptions: {
+                        column: {
+                            stacking: 'normal',
+                            dataLabels: {
+                                enabled: true
+                            }
+                        }
+                    },
+                    series: [{
+                        name: 'Male',
+                        data: ageMales.data
+                    }, {
+                        name: 'Female',
+                        data: ageFemales.data
+                    }]
+                });
+            } catch (error) {
+                console.log(error);
+            }
+        },
     },
-    mounted() {
-        const chart = Highcharts.chart('chart-container', {
+
+    mounted() { //load map data after render
+        mapboxgl.accessToken = 'pk.eyJ1IjoibWF4aWVtYXhpZSIsImEiOiJjbGg3YmJmYngwN2gzM25ydXQwbHk0NjA3In0.xCCDQe7H6UFezNyi5yDbBQ';
+        this.map = new mapboxgl.Map({
+            container: 'map-container',
+            style: 'mapbox://styles/maxiemaxie/clh9u62ox00c701rh24ol9n52',
+            maxBounds:[95.82, -44.44, 173, -10.14],
+            projection: {name: 'mercator'},
+            zoom: 1,
+            attributionControl: false
+        });
+
+        let hoveredStateId = null;
+        this.map.on('load', () => {
+            this.map.addSource('sa4Layer', {
+                'type': 'geojson',
+                'data': 'https://maxieren.github.io/sa4LAYERsimp.geojson',
+                generateId: true
+            });
+
+            // The feature-state dependent fill-opacity expression will render the hover effect when a feature's hover state is set to true.
+            this.map.addLayer({
+                'id': 'sa4-fills',
+                'type': 'fill',
+                'source': 'sa4Layer',
+                'layout': {},
+                'paint': {
+                    'fill-color': '#627BC1',
+                    'fill-opacity': [
+                        'case', ['boolean', ['feature-state', 'hover'], false],
+                        1, 0.5
+                    ]
+                }
+            });
+
+            this.map.addLayer({
+                'id': 'state-borders',
+                'type': 'line',
+                'source': 'sa4Layer',
+                'layout': {},
+                'paint': {
+                    'line-color': '#6484e3',
+                    'line-width': 2
+                }
+            });
+
+            // Create a popup, but don't add it to the map yet.
+            const popup = new mapboxgl.Popup({
+                closeButton: false,
+                closeOnClick: false
+            });
+            this.map.on('click', 'sa4-fills', (e) => {
+                // Copy coordinates array.
+                const coordinates = e.lngLat;
+                const sa4code = e.features[0].properties.SA4_CODE21;
+                const description = e.features[0].properties.SA4_NAME21;
+                new mapboxgl.Popup().setLngLat(coordinates).setHTML('<h3>Selected!</h3>').addTo(this.map);
+                this.getSA4WC(sa4code,description);
+                this.getSA4age(sa4code,description);
+                this.string = "Selected Area: "+ description+ " ("+sa4code+") "
+                this.string0 = "Unemployment Rate: "
+
+            });
+
+            // When the user moves their mouse over the state-fill layer, we'll update the feature state for the feature under the mouse.
+            this.map.on('mousemove', 'sa4-fills', (e) => {
+                this.map.getCanvas().style.cursor = 'pointer';
+                if (e.features.length > 0) {
+                    if (hoveredStateId !== null) {
+                        this.map.setFeatureState(
+                            { source: 'sa4Layer', id: hoveredStateId },
+                            { hover: false }
+                        );
+                    }
+                    hoveredStateId = e.features[0].id;
+                    this.map.setFeatureState(
+                        { source: 'sa4Layer', id: hoveredStateId },
+                        { hover: true }
+                    );
+                }
+                const description = e.features[0].properties.SA4_NAME21;
+                console.log(e.lngLat);
+                popup.setLngLat(e.lngLat).setHTML(description+"<br>" + "Sentiment : ").addTo(this.map);
+            });
+
+            // When the mouse leaves the state-fill layer, update the feature state of the previously hovered feature.
+            this.map.on('mouseleave', 'sa4-fills', () => {
+                if (hoveredStateId !== null) {
+                    this.map.setFeatureState(
+                        { source: 'sa4Layer', id: hoveredStateId },
+                        { hover: false }
+                    );
+                }
+                hoveredStateId = null;
+                // Reset the cursor style
+                this.map.getCanvas().style.cursor = '';
+                popup.remove();
+            });
+        });
+
+
+
+        Highcharts.chart('age-container', {
             chart: {
-                type: 'bar'
+                type: 'column'
             },
             title: {
                 text: 'Unemployment by Age',
                 align: 'left'
             },
             subtitle: {
-                text: 'Source: <a ' +
-                    'href="https://en.wikipedia.org/wiki/List_of_continents_and_continental_subregions_by_population"' +
-                    'target="_blank">Wikipedia.org</a>',
+                text: 'Source: SUDO',
                 align: 'left'
             },
             xAxis: {
-                categories: ['15-25', '25-30', '30-40', '40-50', '50-60'],
-                title: {
-                    text: null
-                },
-                gridLineWidth: 1,
-                lineWidth: 0
+                categories: ['15-24 years', '25-34 years', '35-44 years', '45-54 years','55-64 years','65+ years']
             },
             yAxis: {
                 min: 0,
                 title: {
-                    text: 'Population (millions)',
-                    align: 'high'
+                    text: 'Count trophies'
                 },
-                labels: {
-                    overflow: 'justify'
-                },
-                gridLineWidth: 0
-            },
-            tooltip: {
-                valueSuffix: ' millions'
-            },
-            plotOptions: {
-                bar: {
-                    borderRadius: '50%',
-                    dataLabels: {
-                        enabled: true
-                    },
-                    groupPadding: 0.1
+                stackLabels: {
+                    enabled: true,
+                    style: {
+                        fontWeight: 'bold',
+                        color: ( // theme
+                            Highcharts.defaultOptions.title.style &&
+                            Highcharts.defaultOptions.title.style.color
+                        ) || 'gray',
+                        textOutline: 'none'
+                    }
                 }
             },
             legend: {
-                layout: 'vertical',
-                align: 'right',
+                align: 'left',
+                x: 70,
                 verticalAlign: 'top',
-                x: -40,
-                y: 80,
+                y: 70,
                 floating: true,
-                borderWidth: 1,
                 backgroundColor:
-                    Highcharts.defaultOptions.legend.backgroundColor || '#FFFFFF',
-                shadow: true
+                    Highcharts.defaultOptions.legend.backgroundColor || 'white',
+                borderColor: '#CCC',
+                borderWidth: 1,
+                shadow: false
             },
-            credits: {
-                enabled: false
+            tooltip: {
+                headerFormat: '<b>{point.x}</b><br/>',
+                pointFormat: '{series.name}: {point.y}<br/>Total: {point.stackTotal}'
             },
-            series: [{
-                name: 'Year 1990',
-                data: [631, 727, 3202, 721, 26]
-            }, {
-                name: 'Year 2000',
-                data: [814, 841, 3714, 726, 31]
-            }, {
-                name: 'Year 2010',
-                data: [1044, 944, 4170, 735, 40]
-            }, {
-                name: 'Year 2020',
-                data: [1276, 1007, 4561, 746, 42]
-            }]
+            plotOptions: {
+                column: {
+                    stacking: 'normal',
+                    dataLabels: {
+                        enabled: true
+                    }
+                }
+            }
         });
 
-    }
+        loadWordcloud(Highcharts);
+        Highcharts.chart('wc-container', {
+            accessibility: {
+                screenReaderSection: {
+                    beforeChartFormat: '<h5>{chartTitle}</h5>' +
+                        '<div>{chartSubtitle}</div>' +
+                        '<div>{chartLongdesc}</div>' +
+                        '<div>{viewTableButton}</div>'
+                }
+            },
+            series: [{
+                type: 'wordcloud',
+                name: 'Occurrences'
+            }],
+            title: {
+                text: 'Tweets Word cloud',
+                align: 'left'
+            },
+            subtitle: {
+                text: 'Twitter',
+                align: 'left'
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size: 16px"><b>{point.key}</b></span><br>'
+            }
+        });
+    },
 }
+
+
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+
 h3 {
     margin: 40px 0 0;
 }
-ul {
-    list-style-type: none;
-    padding: 0;
-}
-li {
-    display: inline-block;
-    margin: 0 10px;
+
+
+
+#map-container {
+    left: 50px;
+    height: 610px;
+    width: 1200px;
 }
 
-button{
+button {
     background-color: #fff;
     border: 1px solid #d5d9d9;
     border-radius: 8px;
@@ -285,12 +538,16 @@ button{
     width: 100px;
     margin: 14px;
 }
+
 button:hover {
     background-color: #f7fafa;
 }
+
 button:focus {
     border-color: #008296;
     box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
     outline: 0;
 }
+
+
 </style>

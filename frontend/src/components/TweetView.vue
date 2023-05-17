@@ -1,89 +1,92 @@
 <template>
-
     <div>
-        <div>
-            <div class="container"  id = "map-container"> </div>
-        </div>
-        <div class="container-fluid" id="button-containter">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">Year</button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                    <li><a class="dropdown-item" @click="getData1">2020</a></li>
-                    <li><a class="dropdown-item" @click="getData1">2021</a></li>
-                    <li><a class="dropdown-item" @click="getData1">2022</a></li>
-                    <li><a class="dropdown-item" @click="getData1">2023</a></li>
-                </ul>
-            <button @click="getData1">Update</button>
-            <button @click="getData2">Reset</button>
-        </div>
-
-        <h3>Insights Analysis</h3>
-        <ul>{{string}}</ul>
-        <div id="dashboard" class="container shadow-lg p-3 mb-5 bg-white rounded">
-            <div class="row mb-3">
-                <div class="col-xs-12 col-sm-12 col-md-2 mt-3">
-                    <div class="d-flex flex-column justify-content-center align-items-center">
-                        <img src="https://img.icons8.com/nolan/512/1A6DFF/C822FF/twitter.png" alt="" class="snapshot-img" />
-                        <div class="insights-data pt-2">17,028,900</div>
-                        <div class="insights-title" >Related Twitter</div>
-                        <div class="insights-title pb-2">(2020 - now)</div>
+        <h2>Twoots & Tweets Analysis</h2>
+        <div class="container-lg py-4">
+            <div class="row">
+                <div class="col">
+                    <div class="container" id="word-cl">
+                        <figure class="highcharts-figure">
+                            <div id="mast-word-cloud-container"></div>
+                            <p class="highcharts-description">
+                                Word clouds are used to visualize how often each word in a
+                                text occurs. This example uses an excerpt from the book
+                                Alice's Adventures in Wonderland. Words that appear often will appear
+                                larger.
+                            </p>
+                        </figure>
                     </div>
                 </div>
-
-                <div class="col-xs-12 col-sm-12 col-md-3 mt-3">
-                    <div class="d-flex flex-column justify-content-center align-items-center">
-                        <img src="../assets/images/working-age-population.svg" alt="" class="snapshot-img" />
-                        <div class="insights-data pt-2">17,028,900</div>
-                        <div class="insights-title" >Working Age Population</div>
-                        <div class="insights-title pb-2">(15-64)</div>
+                <div class="col">
+                    <div class="container" id="word-cl">
+                        <figure class="highcharts-figure">
+                            <div id="tweets-word-cloud-container"></div>
+                            <p class="highcharts-description">
+                                Word clouds are used to visualize how often each word in a
+                                text occurs. This example uses an excerpt from the book
+                                Alice's Adventures in Wonderland. Words that appear often will appear
+                                larger.
+                            </p>
+                        </figure>
                     </div>
                 </div>
-
-                <div class="col-xs-12 col-sm-12 col-md-2 mt-3">
-                    <div class="d-flex flex-column justify-content-center align-items-center">
-                        <img src="https://labourmarketinsights.gov.au/Content/assets/images/global/snapshot/employment-rate.svg"  alt="" class="snapshot-img" />
-                        <div class="insights-data pt-2">77.6%</div>
-                        <div class="insights-title">Employment Rate </div>
-                        <div class="insights-title">(15-64)</div>
-                    </div>
-                </div>
-
-                <div class="col-xs-12 col-sm-12 col-md-2 mt-3">
-                    <div class="d-flex flex-column justify-content-center align-items-center">
-                        <img src="https://labourmarketinsights.gov.au/Content/assets/images/global/snapshot/unemployment-rate.svg"  alt="" class="snapshot-img" />
-                        <div class="insights-data pt-2">3.5%</div>
-                        <div class="insights-title">
-                            Unemployment Rate
-                        </div>
-                        <div class="insights-title pb-2">
-                            (15+)
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xs-12 col-sm-12 col-md-3 mt-3">
-                    <div class="d-flex flex-column justify-content-center align-items-center">
-                        <img src="https://labourmarketinsights.gov.au/Content/assets/images/global/snapshot/youth-unemployment-rate.svg"  alt="" class="snapshot-img" />
-
-                        <div class="insights-data pt-2">7.8%</div>
-                        <div class="insights-title">
-                            Youth Unemployment Rate
-                        </div>
-                        <div class="insights-title pb-2">
-                            (15-24)
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
 
-        <div class = "container-fluid">
+        <div id="sentiment-cards" class="container-lg py-4">
+            <div class="row">
+                <div class="col">
+                    <div id="sentiment" class="row shadow-lg p-2 bg-white rounded" style="height:250px;">
+                        <h4>Over-all Sentiment</h4>
+                        <div class="col">
+                            <div class="d-flex flex-column justify-content-center align-items-center">
+                                <img src="https://img.icons8.com/external-filled-outline-design-circle/64/external-Twitter-website-communication-filled-outline-design-circle.png"/>
+                                <div class="insights-data pt-2">17,028,900</div>
+                                <div class="insights-title" >Total Tooters</div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="d-flex flex-column justify-content-center align-items-center">
+                                <img src="https://img.icons8.com/color-glass/96/null/happy.png"/>
+                                <div class="insights-data pt-2">17,028,900</div>
+                                <div class="insights-title" >Positive</div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="d-flex flex-column justify-content-center align-items-center">
+                                <img src="https://img.icons8.com/color-glass/96/null/neutral-emoticon.png"/>
+                                <div class="insights-data pt-2">17,028,900</div>
+                                <div class="insights-title">Neutral</div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="d-flex flex-column justify-content-center align-items-center">
+                                <img src="https://img.icons8.com/color-glass/96/null/sad.png"/>
+                                <div class="insights-data pt-2">17,028,900</div>
+                                <div class="insights-title">Negative</div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <ul>
+            <li v-for="(item, index) in valdata" :key="index">{{ item }}</li> <!-- dynamically updated -->
+        </ul>
+        <div id="buttons" class="container-fluid">
+            <button @click="getData1"> update </button>
+            <!--            <button @click="getData3" >reset</button>-->
+        </div>
+
+        <div id="overview-chart1-container" class="container">
             <figure class="highcharts-figure">
-                <div id="chart-container" style="width:100%; height:400px;"></div>
+                <div id="time-container" style="width:100%; height:400px;"></div>
+                <button @click="getData2" >update</button>
                 <p class="highcharts-description">
-                    Bar chart showing horizontal columns. This chart type is often
-                    beneficial for smaller screens, as the user can scroll through the data
-                    vertically, and axis labels are easy to read.
+                    Chart showing how different series types can be combined in a single
+                    chart. The chart is using a set of column series, overlaid by a line and
+                    a pie series. The line is illustrating the column averages, while the
+                    pie is illustrating the column totals.
                 </p>
             </figure>
         </div>
@@ -92,38 +95,238 @@
 
 <script>
 import axios from 'axios';
-import mapboxgl from 'mapbox-gl';
-import "mapbox-gl/dist/mapbox-gl.css";
+import Highcharts from "highcharts";
+import loadWordcloud from 'highcharts/modules/wordcloud';
 
 export default {
-    name: 'TweetView',
+    name: 'RegionView',
+
     props: {
         msg: String
     },
     data() {
         return {
-            data: [],
-            map: null,
-            mapData: null,
-            string:'这里可以显示一些文字'
+            chart: null,
+            valdata: [56,41,53,37,43]
         };
     },
+    async created(){
+        const tweetAT = await axios.get('http://45.113.235.46:8081/mastodon_activation_time/');
+        const mastAT = await axios.get('http://45.113.235.46:8081/mastodon_activation_time/');
+
+        Highcharts.chart( "time-container",{
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Activation Time'
+            },
+            subtitle: {
+                text: 'Source: Twitter + Mastodon'
+            },
+            xAxis: {
+                categories: ['9am - 3pm','3pm - 9pm','9pm - 3am','3am - 9am'],
+                    crosshair: true
+            },
+            yAxis: {
+                min: 0,
+                    title: {
+                    text: 'Time ( 24 hr)'
+                }
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                    pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                '<td style="padding:0"><b>{point.y:1f} </b></td></tr>',
+                    footerFormat: '</table>',
+                    shared: true,
+                    useHTML: true
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                        borderWidth: 0
+                }
+            },
+            series: [{
+                name: 'Twoots',
+                data: mastAT.data
+
+            }, {
+                name: 'Tweets',
+                data: mastAT.data
+
+            }]
+        })
+
+        const mastWC = await axios.get('http://45.113.235.46:8081/api_word_cloud/');
+        const tweetWC =await  axios.get('http://45.113.235.46:8081/total_word_collect')
+        loadWordcloud(Highcharts);
+        Highcharts.chart('mast-word-cloud-container', {
+            accessibility: {
+                screenReaderSection: {
+                    beforeChartFormat: '<h5>{chartTitle}</h5>' +
+                        '<div>{chartSubtitle}</div>' +
+                        '<div>{chartLongdesc}</div>' +
+                        '<div>{viewTableButton}</div>'
+                }
+            },
+            series: [{
+                type: 'wordcloud',
+                data: mastWC.data,
+                name: 'Occurrences'
+            }],
+            title: {
+                text: 'Twoots Word cloud 2023',
+                align: 'left'
+            },
+            subtitle: {
+                text: 'Mastodon',
+                align: 'left'
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size: 16px"><b>{point.key}</b></span><br>'
+            }
+        });
+        Highcharts.chart('tweets-word-cloud-container', {
+            accessibility: {
+                screenReaderSection: {
+                    beforeChartFormat: '<h5>{chartTitle}</h5>' +
+                        '<div>{chartSubtitle}</div>' +
+                        '<div>{chartLongdesc}</div>' +
+                        '<div>{viewTableButton}</div>'
+                }
+            },
+            series: [{
+                type: 'wordcloud',
+                data:tweetWC.data,
+                name: 'Occurrences'
+            }],
+            title: {
+                text: 'Tweets Word cloud 2022',
+                align: 'left'
+            },
+            subtitle: {
+                text: 'Twitter',
+                align: 'left'
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size: 16px"><b>{point.key}</b></span><br>'
+            }
+        });
+    },
     methods: {
-        async getData1() {
+        async getData1() { // get data 1 method calls api GET that backends implemented
             try {
-                // const response = await axios.get('http://127.0.0.1:8081/api_1');
-                // console.log(response.data);
-                // this.data = response.data;
-                this.string = "已更新"
+                const mastWC = await axios.get('http://45.113.235.46:8081/api_word_cloud/');
+                const tweetWC =await  axios.get('http://45.113.235.46:8081/total_word_collect')
+
+                loadWordcloud(Highcharts);
+                Highcharts.chart('mast-word-cloud-container', {
+                    accessibility: {
+                        screenReaderSection: {
+                            beforeChartFormat: '<h5>{chartTitle}</h5>' +
+                                '<div>{chartSubtitle}</div>' +
+                                '<div>{chartLongdesc}</div>' +
+                                '<div>{viewTableButton}</div>'
+                        }
+                    },
+                    series: [{
+                        type: 'wordcloud',
+                        data: mastWC.data,
+                        name: 'Occurrences'
+                    }],
+                    title: {
+                        text: 'Twoots Word cloud 2023',
+                        align: 'left'
+                    },
+                    subtitle: {
+                        text: 'Mastodon',
+                        align: 'left'
+                    },
+                    tooltip: {
+                        headerFormat: '<span style="font-size: 16px"><b>{point.key}</b></span><br>'
+                    }
+                });
+
+                Highcharts.chart('tweets-word-cloud-container', {
+                    accessibility: {
+                        screenReaderSection: {
+                            beforeChartFormat: '<h5>{chartTitle}</h5>' +
+                                '<div>{chartSubtitle}</div>' +
+                                '<div>{chartLongdesc}</div>' +
+                                '<div>{viewTableButton}</div>'
+                        }
+                    },
+                    series: [{
+                        type: 'wordcloud',
+                        data:tweetWC.data,
+                        name: 'Occurrences'
+                    }],
+                    title: {
+                        text: 'Tweets Word cloud 2022',
+                        align: 'left'
+                    },
+                    subtitle: {
+                        text: 'Twitter',
+                        align: 'left'
+                    },
+                    tooltip: {
+                        headerFormat: '<span style="font-size: 16px"><b>{point.key}</b></span><br>'
+                    }
+                });
             } catch (error) {
                 console.log(error);
             }
         },
         async getData2() {
             try {
-                const response = await axios.get('http://45.113.235.46:8081/api_1');
-                console.log(response.data.features);
-                this.data = response.data;
+
+                const colors = Highcharts.getOptions().colors.map(color =>
+                    Highcharts.color(color).setOpacity(0.5).get()
+                );
+                this.chartOptions = {
+                    chart: {
+                        type: 'scatter'
+                    },
+                    colors,
+                    title: {
+                        text: 'Scatter chart of activation times'
+                    },
+
+                    xAxis: {
+                        categories: ['Twoots', 'Tweets']
+                    },
+                    yAxis: {
+                        title: {
+                            text: 'Activation Time'
+                        }
+                    },
+                    plotOptions: {
+                        scatter: {
+                            showInLegend: false,
+                            jitter: {
+                                x: 0.24,
+                                y: 0
+                            },
+                            marker: {
+                                radius: 3,
+                                symbol: 'circle'
+                            },
+                            tooltip: {
+                                pointFormat: 'Activation Time: {point.y:.3f}'
+                            }
+                        }
+                    },
+
+                    series: [{
+                        name: 'Run 1',
+                        data: this.getTestData(0)
+                    }, {
+                        name: 'Run 2',
+                        data: this.getTestData(1)
+                    }]
+                };
             } catch (error) {
                 console.log(error);
             }
@@ -131,123 +334,82 @@ export default {
     },
 
     mounted() {
-        mapboxgl.accessToken = 'pk.eyJ1IjoibWF4aWVtYXhpZSIsImEiOiJjbGg3YmJmYngwN2gzM25ydXQwbHk0NjA3In0.xCCDQe7H6UFezNyi5yDbBQ';
-        this.map = new mapboxgl.Map({
-            container: 'map-container',
-            style: 'mapbox://styles/maxiemaxie/clh9u62ox00c701rh24ol9n52',
-            maxBounds:[95.82, -44.44, 173, -10.14],
-            projection: {name: 'mercator'},
-            zoom: 1,
-            attributionControl: false
+        loadWordcloud(Highcharts);
+        Highcharts.chart('mast-word-cloud-container', {
+            accessibility: {
+                screenReaderSection: {
+                    beforeChartFormat: '<h5>{chartTitle}</h5>' +
+                        '<div>{chartSubtitle}</div>' +
+                        '<div>{chartLongdesc}</div>' +
+                        '<div>{viewTableButton}</div>'
+                }
+            },
+            series: [{
+                type: 'wordcloud',
+
+                name: 'Occurrences'
+            }],
+            title: {
+                text: 'Twoots Word cloud',
+                align: 'left'
+            },
+            subtitle: {
+                text: 'Mastodon',
+                align: 'left'
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size: 16px"><b>{point.key}</b></span><br>'
+            }
+        });
+        Highcharts.chart('tweets-word-cloud-container', {
+            accessibility: {
+                screenReaderSection: {
+                    beforeChartFormat: '<h5>{chartTitle}</h5>' +
+                        '<div>{chartSubtitle}</div>' +
+                        '<div>{chartLongdesc}</div>' +
+                        '<div>{viewTableButton}</div>'
+                }
+            },
+            series: [{
+                type: 'wordcloud',
+                name: 'Occurrences'
+            }],
+            title: {
+                text: 'Tweets Word cloud',
+                align: 'left'
+            },
+            subtitle: {
+                text: 'Twitter',
+                align: 'left'
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size: 16px"><b>{point.key}</b></span><br>'
+            }
         });
 
-        let hoveredStateId = null;
 
-        this.map.on('load', () => {
-            this.map.addSource('sa4Layer', {
-                'type': 'geojson',
-                'data': 'https://maxieren.github.io/sa4LAYERsimp.geojson',
-                generateId: true
-            });
-
-            // The feature-state dependent fill-opacity expression will render the hover effect when a feature's hover state is set to true.
-            this.map.addLayer({
-                'id': 'sa4-fills',
-                'type': 'fill',
-                'source': 'sa4Layer',
-                'layout': {},
-                'paint': {
-                    'fill-color': '#627BC1',
-                    'fill-opacity': [
-                        'case', ['boolean', ['feature-state', 'hover'], false],
-                        1, 0.5
-                    ]
-                }
-            });
-
-            this.map.addLayer({
-                'id': 'state-borders',
-                'type': 'line',
-                'source': 'sa4Layer',
-                'layout': {},
-                'paint': {
-                    'line-color': '#6484e3',
-                    'line-width': 2
-                }
-            });
-
-            // Create a popup, but don't add it to the map yet.
-            const popup = new mapboxgl.Popup({
-                closeButton: false,
-                closeOnClick: false
-            });
-
-            // When the user moves their mouse over the state-fill layer, we'll update the feature state for the feature under the mouse.
-            this.map.on('mousemove', 'sa4-fills', (e) => {
-                this.map.getCanvas().style.cursor = 'pointer';
-                if (e.features.length > 0) {
-                    if (hoveredStateId !== null) {
-                        this.map.setFeatureState(
-                            { source: 'sa4Layer', id: hoveredStateId },
-                            { hover: false }
-                        );
-                    }
-                    hoveredStateId = e.features[0].id;
-                    this.map.setFeatureState(
-                        { source: 'sa4Layer', id: hoveredStateId },
-                        { hover: true }
-                    );
-                }
-                const description = e.features[0].properties.SA4_NAME21;
-                console.log(e.lngLat);
-                popup.setLngLat(e.lngLat).setHTML(e.features[0].properties.SA4_NAME21).addTo(this.map);
-            });
-
-            // When the mouse leaves the state-fill layer, update the feature state of the previously hovered feature.
-            this.map.on('mouseleave', 'sa4-fills', () => {
-                if (hoveredStateId !== null) {
-                    this.map.setFeatureState(
-                        { source: 'sa4Layer', id: hoveredStateId },
-                        { hover: false }
-                    );
-                }
-                hoveredStateId = null;
-                // Reset the cursor style
-                this.map.getCanvas().style.cursor = '';
-                popup.remove();
-            });
-        });
-    },
+    }
 }
-
-
-
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+img{
+    margin: 14px;
+}
 h3 {
     margin: 40px 0 0;
 }
-
+ul {
+    list-style-type: none;
+    padding: 0;
+}
 li {
     display: inline-block;
     margin: 0 10px;
 }
 
-ul{
-    font-family: "Amazon Ember",sans-serif;
-    font-size: 13px;
-}
-
-#map-container {
-    left: 50px;
-    height: 610px;
-    width: 1200px;
-}
-
-button {
+button{
     background-color: #fff;
     border: 1px solid #d5d9d9;
     border-radius: 8px;
@@ -270,17 +432,57 @@ button {
     width: 100px;
     margin: 14px;
 }
-
 button:hover {
     background-color: #f7fafa;
 }
-
 button:focus {
     border-color: #008296;
     box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
     outline: 0;
 }
 
+.highcharts-figure,
+.highcharts-data-table table {
+    margin: 1em auto;
+}
 
+.highcharts-data-table table {
+    font-family: Verdana, sans-serif;
+    border-collapse: collapse;
+    border: 1px solid #ebebeb;
+    margin: 10px auto;
+    text-align: center;
+    width: 100%;
+    max-width: 500px;
+}
+
+.highcharts-data-table caption {
+    padding: 1em 0;
+    font-size: 1.2em;
+    color: #555;
+}
+
+.highcharts-data-table th {
+    font-weight: 600;
+    padding: 0.5em;
+}
+
+.highcharts-data-table td,
+.highcharts-data-table th,
+.highcharts-data-table caption {
+    padding: 0.5em;
+}
+
+.highcharts-data-table thead tr,
+.highcharts-data-table tr:nth-child(even) {
+    background: #f8f8f8;
+}
+
+.highcharts-data-table tr:hover {
+    background: #f1f7ff;
+}
 
 </style>
+
+
+

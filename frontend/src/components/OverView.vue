@@ -1,20 +1,16 @@
 
 <template>
-
-    <div id="overview-chart1-container">
+    <div class = "container">
         <figure class="highcharts-figure">
-            <highcharts :options="chartOptions"></highcharts>
-            <p class="highcharts-description">
-                Chart showing how different series types can be combined in a single
-                chart. The chart is using a set of column series, overlaid by a line and
-                a pie series. The line is illustrating the column averages, while the
-                pie is illustrating the column totals.
+            <div id="aus-20years-container" style="width:100%; height:400px;"></div>
+            <p class="highcharts-description" align="left">
+                Bar chart showing horizontal columns. This chart type is often
+                beneficial for smaller screens, as the user can scroll through the data
+                vertically, and axis labels are easy to read.
             </p>
         </figure>
     </div>
 
-    <button @click="getData1">unemployment</button> <button @click="getData2">reset</button>
-    <ul>{{string}}</ul>
     <div class="container mt-3">
         <div class="insights-card mb-5">
             <h3 class="text-center mb-3">
@@ -79,6 +75,40 @@
             </div>
         </div>
     </div>
+
+    <div id="analysis" class="container" align="left" style="height:300px;">
+        <h4 class="card-title">
+            We research and analyse employment dynamics across groups, industries, occupations and regions.
+            We share what we have learnt so you can make informed decisions.</h4>
+        <p class="card-text">
+            <ul>
+                <li>Stay up-to-date with conditions in your local labour market</li>
+                <li>Identify jobs and skills in-demand</li>
+                <li>Understand employer needs and recruitment trends</li>
+                <li>Explore the trends impacting the jobs market now and into the future.</li>
+            </ul>
+        </p>
+    </div>
+
+    <div id="chart1-container" class="container">
+        <figure class="highcharts-figure">
+            <highcharts :options="chartOptions"></highcharts>
+            <p class="highcharts-description" align="left">
+                Chart showing how different series types can be combined in a single
+                chart. The chart is using a set of column series, overlaid by a line and
+                a pie series. The line is illustrating the column averages, while the
+                pie is illustrating the column totals.
+            </p>
+            <p class="highcharts-description" align="left">
+                The number of people either working or looking for work (i.e. the labour force) expressed as a proportion of the civilian population (15 years and over).
+                Those not in the labour force include people studying, caring for children at home, retired, experiencing a health condition or injury, or volunteering.
+            </p>
+        </figure>
+    </div>
+
+    <button @click="getEmp">Employment</button>
+    <button @click="getUnemp">Unemployment</button>
+    <ul>{{string}}</ul>
 </template>
 
 
@@ -87,6 +117,7 @@
 <script>
 import axios from "axios";
 import Highcharts from "highcharts";
+import {Chart} from "highcharts-vue";
 
 export default {
     name: 'OverView',
@@ -96,203 +127,243 @@ export default {
     data() {
         return {
             data: [],
-            map: null,
-            mapData: null,
-            string:'The employment rate',
+            string:'',
             chartOptions : {
                 title: {
-                    text: 'Sales of petroleum products March, Norway',
+                    text: 'Age Population (Employment)',
                     align: 'left'
                 },
                 xAxis: {
-                    categories: ['Jet fuel', 'Duty-free diesel', 'Petrol', 'Diesel', 'Gas oil']
+                    categories: ['15-24 Years', '25-34 Years', "35-44 years", "45-54 years", "55-64 years","65 years and over"]
                 },
                 yAxis: {
                     title: {
-                        text: 'Million liters'
+                        text: 'Population'
                     }
                 },
                 tooltip: {
-                    valueSuffix: ' million liters'
+                    valueSuffix: 'million people'
                 },
                 plotOptions: {
                     series: {
                         borderRadius: '25%'
                     }
                 },
-                series: [{
+                series: [
+                    {
+                        type: 'column',
+                        name: '2019',
+                        data: [
+                            2.117,
+                            3.4473,
+                            3.1313,
+                            2.939,
+                            2.0721,
+                            0.5077
+                        ]
+                    },
+                    {
                     type: 'column',
                     name: '2020',
-                    data: [59, 83, 65, 228, 184]
+                    data: [
+                        1.9524,
+                        3.3552,
+                        3.1645,
+                        2.92,
+                        2.084,
+                        0.499
+                    ]
                 }, {
                     type: 'column',
                     name: '2021',
-                    data: [24, 79, 72, 240, 167]
+                    data: [
+                        2.0525,
+                        3.3876,
+                        3.303,
+                        2.9786,
+                        2.1592,
+                        0.5614
+                    ]
                 }, {
                     type: 'column',
                     name: '2022',
-                    data: [58, 88, 75, 250, 176]
+                    data: [
+                        2.2967,
+                        3.51,
+                        3.4467,
+                        3.0494,
+                        2.2221,
+                        0.5864
+                    ]
                 }, {
                     type: 'spline',
                     name: 'Average',
-                    data: [47, 83.33, 70.66, 239.33, 175.66],
+                    data: [1.8254, 3.425, 3.2614, 2.972, 2.1343, 0.5386],
                     marker: {
                         lineWidth: 2,
                         lineColor: Highcharts.getOptions().colors[3],
                         fillColor: 'white'
                     }
-                }, {
-                    type: 'pie',
-                    name: 'Total',
-                    data: [{
-                        name: '2020',
-                        y: 619,
-                        color: Highcharts.getOptions().colors[0], // 2020 color
-                        dataLabels: {
-                            enabled: true,
-                            distance: -50,
-                            format: '{point.total} M',
-                            style: {
-                                fontSize: '15px'
-                            }
-                        }
-                    }, {
-                        name: '2021',
-                        y: 586,
-                        color: Highcharts.getOptions().colors[1] // 2021 color
-                    }, {
-                        name: '2022',
-                        y: 647,
-                        color: Highcharts.getOptions().colors[2] // 2022 color
-                    }],
-                    center: [75, 65],
-                    size: 100,
-                    innerSize: '70%',
-                    showInLegend: false,
-                    dataLabels: {
-                        enabled: false
-                    }
                 }]
             },
         }
     },
+    async created() {
+        const time = await axios.get('http://45.113.235.46:8081/api_overview/time');
+        const female = await axios.get('http://45.113.235.46:8081/api_overview/female_unemployment_rate');
+        const male= await axios.get('http://45.113.235.46:8081/api_overview/male_unemployment_rate');
+        const youth= await axios.get('http://45.113.235.46:8081/api_overview/youth_unemployment_rate');
+        const aus = await axios.get('http://45.113.235.46:8081/api_overview/unemployment_rate');
+
+        Highcharts.chart('aus-20years-container',{
+            title: {
+                text: 'Unemployment rate, Australia (20 years)',
+                x: -20 //center
+            },
+            subtitle: {
+                text: 'Source: SUDO + abs.gov.au (Seasonly Adjusted)',
+                x: -20
+            },
+            xAxis: {
+                categories: time.data
+            },
+            yAxis: {
+                title: {
+                    text: 'Rate (%)'
+                },
+                plotLines: [{
+                    value: 0,
+                    width: 1,
+                    color: '#808080'
+                }]
+            },
+            tooltip: {
+                valueSuffix: '%'
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle',
+                borderWidth: 0
+            },
+            series: [{
+                name: 'Male',
+                data: male.data,
+                allowPointSelect: true
+            }, {
+                name: 'Female',
+                data: female.data,
+                allowPointSelect: true
+            }, {
+                name: 'Youth(15-24)',
+                data: youth.data,
+                allowPointSelect: true
+            }, {
+                name: 'Aus',
+                data: aus.data,
+                allowPointSelect: true
+            }]
+        })
+    },
     methods: {
-        async getData1() {
+        async getEmp() {
             try {
-                // const response = await axios.get('http://127.0.0.1:8081/api_1');
-                // console.log(response.data);
-                // this.data = response.data;
+                const emp2019 = await axios.get('http://45.113.235.46:8081/age_population/2019/employed');
+                const emp2020 = await axios.get('http://45.113.235.46:8081/age_population/2020/employed');
+                const emp2021 = await axios.get('http://45.113.235.46:8081/age_population/2021/employed');
+                const emp2022 = await axios.get('http://45.113.235.46:8081/age_population/2022/employed');
+
                 this.chartOptions = {
                     title: {
-                        text: 'Unmployment Rate',
-                            x: -20 //center
+                        text: 'Age Population (Employment)',
+                        align: 'left'
                     },
-                    subtitle: {
-                        text: 'Source: WorldClimate.com',
-                            x: -20
+                    plotOptions: {
+                        series: {
+                            borderRadius: '25%'
+                        }
                     },
-                    xAxis: {
-                        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-                            'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
-                        ]
-                    },
-                    yAxis: {
-                        title: {
-                            text: 'Temperature (°C)'
+                    series: [
+                        {
+                            type: 'column',
+                            name: '2019',
+                            data: emp2019.data
                         },
-                        plotLines: [{
-                            value: 0,
-                            width: 1,
-                            color: '#808080'
+                        {
+                            type: 'column',
+                            name: '2020',
+                            data: emp2020.data
+                        }, {
+                            type: 'column',
+                            name: '2021',
+                            data: emp2021.data
+                        }, {
+                            type: 'column',
+                            name: '2022',
+                            data: emp2022.data
+                        }, {
+                            type: 'spline',
+                            name: 'Average',
+                            data: [1.8254, 3.425, 3.2614, 2.972, 2.1343, 0.5386],
+                            marker: {
+                                lineWidth: 2,
+                                lineColor: Highcharts.getOptions().colors[3],
+                                fillColor: 'white'
+                            }
                         }]
-                    },
-                    tooltip: {
-                        valueSuffix: '°C'
-                    },
-                    legend: {
-                        layout: 'vertical',
-                            align: 'right',
-                            verticalAlign: 'middle',
-                            borderWidth: 0
-                    },
-                    series: [{
-                        name: 'Male',
-                        data: [4.4,5,20.4,18.5,13,7.2,9,14,11,8,6,3.4]
-                    }, {
-                        name: 'Female',
-                        data: [-11,4.5,-9,8.3,19.4,6.7,2.1,4.8,10,14.5,12,20.2]
-                    }, {
-                        name: 'youth',
-                        data: [5,5,11,9,14,14,0,3,7,10,6,4]
-                    }, {
-                        name: 'adult',
-                        data: [3,0,5,13,17,9,2,19,14,4,1,16]
-                    }]
                 };
-                this.string = "已更新!"
+                this.string = "Updated!"
             } catch (error) {
                 console.log(error);
             }
         },
-        async getData2() {
+        async getUnemp() {
             try {
-                //const response = await axios.post('http://127.0.0.1:8081/api_1');
-                //console.log(response.data);
-                //this.data = response.data;
+                const unemp2019 = await axios.get('http://45.113.235.46:8081/age_population/2019/unemployed');
+                const unemp2020 = await axios.get('http://45.113.235.46:8081/age_population/2020/unemployed');
+                const unemp2021 = await axios.get('http://45.113.235.46:8081/age_population/2021/unemployed');
+                const unemp2022 = await axios.get('http://45.113.235.46:8081/age_population/2022/unemployed');
+                // this.data = response.data;
                 this.chartOptions = {
                     title: {
-                        text: 'Employment Rate',
-                        x: -20 //center
+                        text: 'Age Population (Unemployment)',
+                        align: 'left'
                     },
-                    subtitle: {
-                        text: 'Source: WorldClimate.com',
-                        x: -20
-                    },
-                    xAxis: {
-                        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-                            'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
-                        ]
-                    },
-                    yAxis: {
-                        title: {
-                            text: 'Temperature (°C)'
+                    series: [
+                        {
+                            type: 'column',
+                            name: '2019',
+                            data: unemp2019.data
                         },
-                        plotLines: [{
-                            value: 0,
-                            width: 1,
-                            color: '#808080'
+                        {
+                            type: 'column',
+                            name: '2020',
+                            data: unemp2020.data
+                        }, {
+                            type: 'column',
+                            name: '2021',
+                            data: unemp2021.data
+                        }, {
+                            type: 'column',
+                            name: '2022',
+                            data: unemp2022.data
+                        }, {
+                            type: 'spline',
+                            name: 'Average',
+                            data: [0.2077, 0.1117, 0.0635, 0.055,0.0373,0.0015],
+                            marker: {
+                                lineWidth: 2,
+                                lineColor: Highcharts.getOptions().colors[3],
+                                fillColor: 'white'
+                            }
                         }]
-                    },
-                    tooltip: {
-                        valueSuffix: '°C'
-                    },
-                    legend: {
-                        layout: 'vertical',
-                        align: 'right',
-                        verticalAlign: 'middle',
-                        borderWidth: 0
-                    },
-                    series: [{
-                        name: 'Male',
-                        data: [7.0, 6.9, 9.5, 14.5, 18.2, 21.5, 25.2, 26.5, 23.3, 18.3, 13.9, 9.6]
-                    }, {
-                        name: 'Female',
-                        data: [-0.2, 0.8, 5.7, 11.3, 17.0, 22.0, 24.8, 24.1, 20.1, 14.1, 8.6, 2.5]
-                    }, {
-                        name: 'youth',
-                        data: [-0.9, 0.6, 3.5, 8.4, 13.5, 17.0, 18.6, 17.9, 14.3, 9.0, 3.9, 1.0]
-                    }, {
-                        name: 'adult',
-                        data: [3.9, 4.2, 5.7, 8.5, 11.9, 15.2, 17.0, 16.6, 14.2, 10.3, 6.6, 4.8]
-                    }]
                 };
             } catch (error) {
                 console.log(error);
             }
         }
-    },
-    mounted() {
     }
+
 }
 </script>
 
@@ -361,4 +432,6 @@ button:focus {
     box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
     outline: 0;
 }
+
+
 </style>

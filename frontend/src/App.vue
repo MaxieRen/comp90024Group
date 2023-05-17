@@ -18,13 +18,10 @@
                             <a class="nav-link" href="/view0">Overview</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/TweetView">Twitter Analysis</a>
+                            <a class="nav-link" href="/RegionView">By Regions</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/RegionView">Regions</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/IndustView">Industries</a>
+                            <a class="nav-link" href="/TweetView">Tweets Analysis</a>
                         </li>
                     </ul>
                 </div>
