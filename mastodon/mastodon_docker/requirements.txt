@@ -1,0 +1,4 @@
+CouchDB==1.2
+html2text==2020.1.16
+nltk==3.8.1
+Mastodon.py==1.8.1

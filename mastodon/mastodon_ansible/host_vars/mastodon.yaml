@@ -1,0 +1,10 @@
+---
+mastodon_dir: mastodon
+db_username: admin
+db_password: admin
+db_name: mastodon
+db_ip: 45.113.234.51
+mastodon_server: mastodon.au
+mastodon_token: htWXl-R8PGnvp-qKyQX5frYgKx2IWUtVBsrgeZZXb7Q
+ansible_user: ubuntu
+container_name: mastodon_client 
