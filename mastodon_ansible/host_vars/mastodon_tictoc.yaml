@@ -1,0 +1,10 @@
+---
+mastodon_dir: mastodon_tictoc
+db_username: admin
+db_password: admin
+db_name: mastodon_tictoc
+db_ip: 45.113.234.51
+mastodon_server: tictoc.social
+mastodon_token: RxTlhr86f9BV4h8O19kCmcoKijuLwI01m_2pXX7dZpA
+ansible_user: ubuntu
+container_name: mastodon_tictoc 
