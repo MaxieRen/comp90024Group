@@ -124,7 +124,7 @@ def unemployment_age(sa4_code, sex):
     query_result = db.view("Docs/unemployment_age", group_level=3)
     # result = [row for row in query_result]
     result = [row.get('value') for row in query_result if row.get('key')[0] == sa4_code and row.get('key')[2] == sex]
-    
+    result = list(map(lambda x: round(x / 4, 2), result))
     return result
 
 @app.route('/insights/<sa4_code>/<attr_name>')
@@ -165,12 +165,6 @@ def count_mastodon_twitter():
         total_size = total_size + db_size
     return str(f'{total_size:,}')
 
-@app.route('/sentiment_mastodon/<param>')
-def sentiment_mastodon(param):
-    mastodon_db = ['mastodon', 'mastodon_au']
-    
-    
-    return str(f'{total_size:,}')
 
 @app.route('/total_word_collect', methods=['GET', 'POST'])
 def api_4():
@@ -240,10 +234,13 @@ def api_7(sa4, param):
     out_list = []
     for row in db.find(query):
         out_list.append(row[param])
-    if param != '2022_working_age_population':
-        content = str(f'{out_list[0]}%')
+    if out_list:
+        if param != '2022_working_age_population':
+            content = str(f'{out_list[0]}%')
+        else:
+            content = str(f'{out_list[0]:,}')
     else:
-        content = str(f'{out_list[0]:,}')
+        content = str(0)
     return content
 
 @app.route('/twitter_user_number/<sa4>', methods=['GET', 'POST']) # twitter user number
@@ -303,6 +300,28 @@ def api_10():
         out_list.append(items)
 
     return out_list
+
+@app.route('/sentiment_number/<param>', methods=['GET', 'POST']) # sentiment number [pos, neu, neg]
+def api_11(param):
+    db_name_list = ['mastodon', 'mastodon_au']
+    out_dict = {'pos':0, 'neu':0, 'neg':0}
+    for db_name in db_name_list:
+        db = couch[db_name]
+        db_view = db.view('DesignDoc/sentimentView', group_level=1)
+        for row in db_view:
+            if row.key in out_dict.keys():
+                out_dict[row.get('key')] += row.get('value')
+
+    out_list = [out_dict['pos'], out_dict['neu'], out_dict['neg']]
+    if out_list == []:
+        return str(f'{0:,}')
+    elif param == 'pos':
+        return str(f'{out_list[0]:,}')
+    elif param == 'neu':
+        return str(f'{out_list[1]:,}')
+    else:
+        return str(f'{out_list[2]:,}')
+    
 
 
 if __name__ == '__main__':
