@@ -9,7 +9,7 @@
                             <div id="mast-word-cloud-container"></div>
                             <p class="highcharts-description">
                                 Word clouds are used to visualize how often each word in all
-                                twooters occurs. Words that appear often will appear
+                                twootes occurs. Words that appear often will appear
                                 larger.
                             </p>
                         </figure>
@@ -39,27 +39,27 @@
                             <div class="d-flex flex-column justify-content-center align-items-center">
                                 <img src="https://img.icons8.com/external-filled-outline-design-circle/64/external-Twitter-website-communication-filled-outline-design-circle.png"/>
                                 <div class="insights-data pt-2">{{twoots}}</div>
-                                <div class="insights-title" >Total Tooters</div>
+                                <div class="insights-title" >Total Twootes</div>
                             </div>
                         </div>
                         <div class="col">
                             <div class="d-flex flex-column justify-content-center align-items-center">
                                 <img src="https://img.icons8.com/color-glass/96/null/happy.png"/>
-                                <div class="insights-data pt-2">17,028,900</div>
+                                <div class="insights-data pt-2">{{mastPOS}}</div>
                                 <div class="insights-title" >Positive</div>
                             </div>
                         </div>
                         <div class="col">
                             <div class="d-flex flex-column justify-content-center align-items-center">
                                 <img src="https://img.icons8.com/color-glass/96/null/neutral-emoticon.png"/>
-                                <div class="insights-data pt-2">17,028,900</div>
+                                <div class="insights-data pt-2">{{ mastNEU }}</div>
                                 <div class="insights-title">Neutral</div>
                             </div>
                         </div>
                         <div class="col">
                             <div class="d-flex flex-column justify-content-center align-items-center">
                                 <img src="https://img.icons8.com/color-glass/96/null/sad.png"/>
-                                <div class="insights-data pt-2">17,028,900</div>
+                                <div class="insights-data pt-2">{{ mastNEG }}</div>
                                 <div class="insights-title">Negative</div>
                             </div>
                         </div>
@@ -74,7 +74,7 @@
 <!--        </ul>-->
 
         <div id="buttons" class="container-fluid">
-            <button @click="getCount" >update</button>
+            <button @click="updateCard" >update</button>
         </div>
 
         <div id="overview-chart1-container" class="container">
@@ -101,6 +101,9 @@ export default {
     },
     data() {
         return {
+            mastPOS:null,
+            mastNEU:null,
+            mastNEG:null,
             twoots:null,
             chart: null,
             valdata: [56,41,53,37,43]
@@ -108,6 +111,12 @@ export default {
     },
     async created(){
         const mastCount  = await  axios.get('http://115.146.92.228:8081/count_mastodon/');
+        const pos = await axios.get("http://115.146.92.228:8081/sentiment_number/pos");
+        const neu = await axios.get("http://115.146.92.228:8081/sentiment_number/neu");
+        const neg = await axios.get("http://115.146.92.228:8081/sentiment_number/neg");
+        this.mastPOS = pos.data;
+        this.mastNEU = neu.data;
+        this.mastNEG = neg.data;
         this.twoots = mastCount.data;
 
         const mastWC = await axios.get('http://115.146.92.228:8081/api_word_cloud/');
@@ -181,13 +190,11 @@ export default {
             },
             xAxis: {
                 categories: ['3am - 9am','9am - 3pm','3pm - 9pm','9pm - 3am'],
-                    crosshair: true
+                crosshair: true
             },
             yAxis: {
                 min: 0,
-                    title: {
-                    text: 'Time ( 24 hr)'
-                }
+                title: {text: 'Time ( 24 hr)'}
             },
             tooltip: {
                 headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
@@ -217,60 +224,16 @@ export default {
 
     },
     methods: {
-        async getCount(){
+
+        async updateCard(){
             const mastCount  = await  axios.get('http://115.146.92.228:8081/count_mastodon/');
             this.twoots = mastCount.data;
-        },
-        async getData2() {
-            try {
-                const colors = Highcharts.getOptions().colors.map(color =>
-                    Highcharts.color(color).setOpacity(0.5).get()
-                );
-                this.chartOptions = {
-                    chart: {
-                        type: 'scatter'
-                    },
-                    colors,
-                    title: {
-                        text: 'Scatter chart of activation times'
-                    },
-
-                    xAxis: {
-                        categories: ['Twoots', 'Tweets']
-                    },
-                    yAxis: {
-                        title: {
-                            text: 'Activation Time'
-                        }
-                    },
-                    plotOptions: {
-                        scatter: {
-                            showInLegend: false,
-                            jitter: {
-                                x: 0.24,
-                                y: 0
-                            },
-                            marker: {
-                                radius: 3,
-                                symbol: 'circle'
-                            },
-                            tooltip: {
-                                pointFormat: 'Activation Time: {point.y:.3f}'
-                            }
-                        }
-                    },
-
-                    series: [{
-                        name: 'Run 1',
-                        data: this.getTestData(0)
-                    }, {
-                        name: 'Run 2',
-                        data: this.getTestData(1)
-                    }]
-                };
-            } catch (error) {
-                console.log(error);
-            }
+            const pos = await axios.get("http://115.146.92.228:8081/sentiment_number/pos");
+            const neu = await axios.get("http://115.146.92.228:8081/sentiment_number/neu");
+            const neg = await axios.get("http://115.146.92.228:8081/sentiment_number/neg");
+            this.mastPOS = pos.data;
+            this.mastNEU = neu.data;
+            this.mastNEG = neg.data;
         }
     },
 
@@ -328,12 +291,10 @@ export default {
             }
         });
 
-
     }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 img{
     margin: 14px;
