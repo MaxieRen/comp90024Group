@@ -93,9 +93,6 @@
                         <p class="card-text">
                             <ul>
                                 <li>This page provides a snapshot of current labour market conditions.</li>
-                                <li>Identify jobs and skills in-demand</li>
-                                <li>Understand employer needs and recruitment trends</li>
-                                <li></li>
                             </ul>
                         </p>
                     </div>
@@ -259,7 +256,7 @@ export default {
                             enabled: true,
                             style: {
                                 fontWeight: 'bold',
-                                color: ( // theme
+                                color: (
                                     Highcharts.defaultOptions.title.style &&
                                     Highcharts.defaultOptions.title.style.color
                                 ) || 'gray',
@@ -303,13 +300,8 @@ export default {
                 console.log(error);
             }
         },
-        async updateRegion(x){
+        async updateRegion(x,users,sentiment){
             try {
-                const users = await axios.get('http://115.146.92.228:8081/twitter_user_number/'+x);
-                const precent = await axios.get('http://115.146.92.228:8081/satisfaction/'+x);
-                this.user = users.data;
-                this.percentage = precent.data;
-
                 const working = await axios.get('http://115.146.92.228:8081/labour_2022/'+x+'/2022_working_age_population');
                 const unemp = await axios.get('http://115.146.92.228:8081/labour_2022/'+x+'/2022_unemployment_rate_15_plus');
                 const emp = await axios.get('http://115.146.92.228:8081/labour_2022/'+x+'/2022_employment_rate_15_64');
@@ -319,14 +311,17 @@ export default {
                 this.empRate =emp.data;
                 this.youth = youth.data;
 
-                const time1 = await axios.get('http://115.146.92.228:8081/area_active_time/'+x+'/1');
-                const time2 = await axios.get('http://115.146.92.228:8081/area_active_time/'+x+'/2');
-                const time3 = await axios.get('http://115.146.92.228:8081/area_active_time/'+x+'/3');
-                const time4 = await axios.get('http://115.146.92.228:8081/area_active_time/'+x+'/4');
+                const time1 = await axios.get('http://115.146.92.228:8081/area_active_time/'+x+'/0');
+                const time2 = await axios.get('http://115.146.92.228:8081/area_active_time/'+x+'/1');
+                const time3 = await axios.get('http://115.146.92.228:8081/area_active_time/'+x+'/2');
+                const time4 = await axios.get('http://115.146.92.228:8081/area_active_time/'+x+'/3');
                 this.one = time1.data;
                 this.two = time2.data;
                 this.three =time3.data;
                 this.four = time4.data;
+
+                this.user = users;
+                this.percentage = sentiment;
             }
             catch (error){
             console.log(error)}
@@ -396,7 +391,9 @@ export default {
                 new mapboxgl.Popup().setLngLat(coordinates).setHTML('<h4>Selected!</h4>').addTo(this.map);
                 this.getSA4WC(sa4code,description);
                 this.getSA4age(sa4code,description);
-                this.updateRegion(sa4code);
+                const sent = e.features[0].properties.SENTIMENT;
+                const users = e.features[0].properties.USER_COUNT;
+                this.updateRegion(sa4code,users,sent);
                 this.string = "Selected Area: "+ description+ " ("+sa4code+") "
             });
 
@@ -417,9 +414,10 @@ export default {
                     );
                 }
                 const description = e.features[0].properties.SA4_NAME21;
-                const sa4code = e.features[0].properties.SA4_CODE21;
-                this.UNEMP_RATE = e.features[0].properties.UNEMP_RATE;
-                popup.setLngLat(e.lngLat).setHTML(description+"<br>" + "Sentiment: ").addTo(this.map);
+                const sent = e.features[0].properties.SENTIMENT;
+                const users = e.features[0].properties.USER_COUNT;
+                const unempRate = e.features[0].properties.UNEMP_RATE;
+                popup.setLngLat(e.lngLat).setHTML(description+"<br> UnEmp Rate: "+ unempRate +"%<br> Sentiment: "+ sent +"<br> User count: "+ users).addTo(this.map);
             });
 
             // When the mouse leaves the state-fill layer, update the feature state of the previously hovered feature.
