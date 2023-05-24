@@ -1,7 +1,16 @@
 ## comp90024 Group Assignment Repo
 
 Team Members:
+
 Maxie Ren (581799)
+
+Wentao Xie
+
+Qingtan Shen
+
+Fan Zhang
+
+Yang Meng
 
 - Please use pull request to merge code!
 
