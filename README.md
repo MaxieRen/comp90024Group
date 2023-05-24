@@ -1,5 +1,7 @@
 ## comp90024 Group Assignment Repo
 
+Team Members:
+Maxie Ren (581799)
 
 - Please use pull request to merge code!
 
